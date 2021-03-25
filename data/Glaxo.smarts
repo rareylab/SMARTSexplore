@@ -1,0 +1,55 @@
+[Br,Cl,I][CX4;CH,CH2] Glaxo.R1 Reactive alkyl halides
+[S,C](=[O,S])[F,Br,Cl,I] Glaxo.R2 Acid halides
+O=CN=[N+]=[N-] Glaxo.R3 Carbazides
+COS(=O)O[C,c] Glaxo.R4 Sulphate esters
+COS(=O)(=O)[C,c] Glaxo.R5 Sulphonates
+C(=O)OC(=O) Glaxo.R6 Acid anhydrides
+OO Glaxo.R7 Peroxides
+C(=O)Oc1c(F)c(F)c(F)c(F)c1(F) Glaxo.R8 Pentafluorophenyl esters
+C(=O)Oc1ccc(N(=O)~[OX1])cc1 Glaxo.R9 Paranitrophenyl esters
+C(=O)Onnn Glaxo.R10 esters of HOBT
+N=C=[S,O] Glaxo.R11 Isocyanates & Isothiocyanates
+OS(=O)(=O)C(F)(F)F Glaxo.R12 Triflates
+P(=S)(S)S Glaxo.R13 lawesson's reagent and derivatives
+NP(=O)(N)N Glaxo.R14 phosphoramides
+cN=[N+]=[N-] Glaxo.R15 Aromatic azides
+C(=O)C[N+,n+] Glaxo.R16 beta carbonyl quaternary Nitrogen
+[N;R0][N;R0]C(=O) Glaxo.R17 acylhydrazide
+[C+,Cl+,I+,P+,S+] Glaxo.R18 Quaternary C, Cl, I, P or S
+C=P Glaxo.R19 Phosphoranes
+[Cl]C([C&R0])=N Glaxo.R20 Chloramidines
+[N&D2](=O) Glaxo.R21 Nitroso
+[P,S][Cl,Br,F,I] Glaxo.R22 P/S Halides
+N=C=N Glaxo.R23 Carbodiimide
+[N+]#[C-] Glaxo.R24 Isonitrile
+C(=O)N(C(=O))OC(=O) Glaxo.R25 Triacyloximes
+N#CC[OH] Glaxo.R26 Cyanohydrins
+N#CC(=O) Glaxo.R27 Acyl cyanides
+S(=O)(=O)C#N Glaxo.R28 Sulfonyl cyanides
+P(OCC)(OCC)(=O)C#N Glaxo.R29 Cyanophosphonates
+[N;R0]=[N;R0]C#N Glaxo.R30 Azocyanamides
+[N;R0]=[N;R0]CC=O Glaxo.R31 Azoalkanals
+[CD2;R0][CD2;R0][CD2;R0][CD2;R0][CD2;R0][CD2;R0][CD2;R0] Glaxo.I1 Aliphatic methylene chains 7 or more long
+[C,S,P](=O)[OH].[C,S,P](=O)[OH].[C,S,P](=O)[OH].[C,S,P](=O)[OH] Glaxo.I2 Compounds with 4 or more acidic groups
+[O;R1][C;R1][C;R1][O;R1][C;R1][C;R1][O;R1] Glaxo.I3 Crown ethers
+SS Glaxo.I4 Disulphides
+[SH] Glaxo.I5 Thiols
+C1[O,S,N]C1 Glaxo.I6 Epoxides, Thioepoxides, Aziridines
+c([OH])c([OH])c([OH]) Glaxo.I7 2,4,5 trihydroxyphenyl
+c([OH])c([OH])cc([OH]) Glaxo.I8 2,3,4 trihydroxyphenyl
+N=NC(=S)N Glaxo.I9 Hydrazothiourea
+SC#N Glaxo.I10 Thiocyanate
+cC[N+] Glaxo.I11 Benzylic quaternary Nitrogen
+C[O,S;R0][C;R0](=S) Glaxo.I12 Thioesters
+N[CH2]C#N Glaxo.I13 Cyanamides
+C1(=O)OCC1 Glaxo.I14 Four membered lactones
+P(=O)([OH])OP(=O)[OH] Glaxo.I15 Di and Triphosphates
+N1CCC1=O Glaxo.I16 Betalactams
+O=C1[#6]~[#6]C(=O)[#6]~[#6]1 Glaxo.N1 Quinones
+C=CC=CC=CC=C Glaxo.N2 Polyenes
+O1CCCCC1OC2CCC3CCCCC3C2 Glaxo.N3 Saponin derivatives
+O=C1NCC2CCCCC21 Glaxo.N4 Cytochalasin derivatives
+O=C1CCCC(N1)=O Glaxo.N5 Cycloheximide derivatives
+O1CCCCC1C2CCCO2 Glaxo.N6 Monensin derivatives
+[OH]c1cc([OH])cc2=[O+]C(=C([OH])Cc21)c3cc([OH])c([OH])cc3 Glaxo.N7 Cyanidin derivatives
+C12OCCC(O1)CC2 Glaxo.N8 Squalestatin derivatives

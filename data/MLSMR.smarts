@@ -1,0 +1,116 @@
+C(=O)OC(=O) MLSMR.anhydride
+C(=O)Oc1c(F)c(F)c(F)c(F)c1(F) MLSMR.pentafluorophenyl ester
+C(=O)Oc1ccc([N+]([O-])=O)cc1 MLSMR.p-nitrophenyl ester
+O=*N=[N+]=[N-] MLSMR.any carbazide
+C(=O)Onnn MLSMR.HOBT ester
+cN=[N+]=[N-] MLSMR.aromatic azide
+[#6,#8,#16]-[CH1]=[NH1] MLSMR.imine2
+S(=O)(=O)C#N MLSMR.sulfonyl cyanide
+[N;R0]=[N;R0]C#N MLSMR.azocyanamide
+N#CC[OH] MLSMR.cyanohydrin
+N#CC(=O) MLSMR.acyl cyanide
+[S,C](=[O,S])[F,Br,Cl,I] MLSMR.acid halide
+[Cl]C([C&R0])=N MLSMR.chloramidine
+[P,S][F,Cl,Br,I] MLSMR.P/S halide
+[C+,Cl+,I+,P+,S+] MLSMR.quaternary
+[!#6;!#7;!#8;!#16;!#1;!#3;!#9;!#11;!#12;!#15;!#17;!#19;!#20;!#30;!#35] MLSMR.unacceptable atoms
+C(=O)N(C(=O))OC(=O) MLSMR.triacyloxime
+C(=O)CC[N+,n+] MLSMR.b-carbonyl quaternary nitrogen
+cC[N+] MLSMR.benzylic quaternary nitrogen
+C=P MLSMR.phosphorane
+P(=S)(S)S MLSMR.Lawesson reagent derivatives
+P(OCC)(OCC)(=O)C#N MLSMR.cyanophosphonate
+COS(=O)(=O)[C,c] MLSMR.sulfonate
+a-S(=O)(=O)-O[$([a&!#6]),$(c[a&!#6]),$(cc[a&!#6]),$(ccc[a&!#6]),$(cccc[a&!#6]),$(ccccc[a&!#6])] MLSMR.Heteroaryl sulfonate
+COS(=O)O[C,c] MLSMR.sulfate ester
+OS(=O)(=O)C(F)(F)F MLSMR.triflate
+[C,S,P](=O)[OH].[C,S,P](=O)[OH].[C,S,P](=O)[OH].[C,S,P](=O)[OH] MLSMR.polyacidic
+[OH]-S(=O)(=O)-* MLSMR.Sulfonic acid
+[SH] MLSMR.thiol
+[OH1]-C(-c1ccccc1)c2ccccc2 MLSMR.benzhydrol
+[OH1]c1ccc([OH1])cc1 MLSMR.dihydroxybenzene
+c([OH])c([OH])c([OH]) MLSMR.2,3,4trihydroxyphenyl
+c([OH])c([OH])cc([OH]) MLSMR.2,4,5trihydroxyphenyl
+*=C=* MLSMR.allene
+N=N=N MLSMR.Azide
+[N;R0]=[N;R0]CC=O MLSMR.azoalkanal
+N=NC(=S)N MLSMR.hydrazothiourea
+N=N MLSMR.Azo
+[#6]-[CH1]=O MLSMR.aldehyde
+[#6]-O[CH1](-[#6])[OH1] MLSMR.hemiacetal
+[#6]-O[CH1](-[#6])O-[#6] MLSMR.acetal
+[#6]-C(=O)-[#6] MLSMR.Ketone
+[#6]-C(=O)O-[#6] MLSMR.Ester
+[#6,#8,#16]-C(=[NH1])[#6,#8,#16] MLSMR.imine 1
+C=[NH] MLSMR.Imine 3
+CC(=S)C MLSMR.thioketone
+C[O,S;R0][C;R0](=S) MLSMR.thioester
+COC(=S)C MLSMR.thionoester
+CC(=S)N MLSMR.thioamide
+NC(=S)N MLSMR.thiourea
+[N&D2](=O) MLSMR.nitroso
+[CD2;R0][CD2;R0][CD2;R0][CD2;R0][CD2;R0][CD2;R0] MLSMR.long chain hydrocarbon
+[N,C,S,O]-&!@[N,C,S,O]&!@[N,C,S,O]&!@[N,C,S,O]&!@[N,C,S,O]&!@[N,C,S,O]&!@[N,C,S,O] MLSMR.Long aliphatic chain
+[$([A&D2]),$([A&D1])]!@[A&D2]!@[A&D2]!@[A&D2]!@[A&D2]!@[$([A&D2]),$([A&D1])] MLSMR.Unbranched chain
+C=CC=CC=CC=C MLSMR.polyene
+acC=&!@Cca MLSMR.Dye 25
+[N+]#[C-] MLSMR.isonitrile
+SC#N MLSMR.thiocyanate
+N[CH2]C#N MLSMR.cyanamide
+c([N+](=O)[O-]) MLSMR.Dye 16 (1)
+a-[N+](=O)[O-].a-[N+](=O)[O-] MLSMR.nitro aromatic 2+
+O=[N+](-[O-])-caac-[$(N(C)C),$([NH]C),$([NH2])] MLSMR.Dye 29
+c1cccc(C(=O)[C,c]([#7])=,:[C,c]([#7])C2(=O))c12 MLSMR.Dye 1 (1)
+N=C1[#6]:,=[#6]C(=[C,N])[#6]:,=[#6]1 MLSMR.Dye 7
+*=,:[#6]C([#6]=,:*)[#6]=,:* MLSMR.Dye 11
+ac-*=&!@*-&!@C(=O)&!@ca MLSMR.Dye 9
+c1cccc2C(=O)C(C:,=*)C(=O)c12 MLSMR.Dye 32
+c12cccc(C(=O)C(ca)C(=O)3)c2c3ccc1 MLSMR.Dye 6
+NS(=O)(=O)c1cccc([#7])c1 MLSMR.Dye 22
+OCccCO MLSMR.Dye 2
+c1ccccc1-n2nnnc2[CH2]* MLSMR.Dye 26
+[Br,Cl,I][CX4,CH,CH2,CH3] MLSMR.alkyl halide
+O=CC(-[F,Cl,Br,I])([F,Cl,Br,I])-[F,Cl,Br,I] MLSMR.Perhalo_ketone
+O=CCC[F,Cl,Br,I] MLSMR.Beta halo carbonyl
+[F,Cl,Br][c]1:[c,n]:[c,n]:[n]:[c,n]:[c,n]1 MLSMR.4-halopyridine
+[F,Cl,Br][c]1:[c,n]:[c,n]:[c,n]:[c,n]:[n]1 MLSMR.2-halopyridine
+*[N,S,O]-&!@[N,S,O][#6] MLSMR.Hetero_hetero
+OO MLSMR.peroxide
+SS MLSMR.disulfide
+[#6]-[NH]-[NH]-[#6] MLSMR.hydrazine
+[N;R0][N;R0]C(=O) MLSMR.acyl hydrazine
+[#6]-[CH1]=C-C(=O)[#6,#7,#8] MLSMR.vinyl michael acceptor1
+[CH2]=C-C(=O)[#6,#7,#8] MLSMR.vinyl michael acceptor2
+N#CC(=C)C#N MLSMR.michael acceptor 5
+[#6,#7]&!@[#6](=&!@[CH])&!@C(=O)-&!@[C,N,O,S] MLSMR.Michael acceptor 6
+[#6]-C#CC(=O)[#6,#7,#8] MLSMR.alkynyl michael acceptor1
+[CH1]#CC(=O)-[#6,#7,#8] MLSMR.alkynyl michael acceptor2
+C[N+](=O)[O-] MLSMR.nitroalkane
+[O;R1][C;R1][C;R1][O;R1][C;R1][C;R1][O;R1] MLSMR.crown ether
+[#6]-O-[N+](=O)[O-] MLSMR.nitrate
+O=C-&!@C=O MLSMR.Oxalyl
+*-C(=O)-&!@[NH]-C&!@C(=O)-&!@[NH]-* MLSMR.Dipeptide
+C[N+](-[O-])(C)C MLSMR.quaternary nitroxy
+a-P(-a)-a MLSMR.Triphenylphosphine
+[OH]-P(=O)(-O)-* MLSMR.Phosphoric acid
+COP(=O)(-*)O MLSMR.Phosphoric ester
+P(=O)([OH])OP(=O)[OH] MLSMR.di/triphosphate
+([#6]OP(=O)(*)O[#6].[#6]OP(=O)(*)O[#6].[#6]OP(=O)(*)O[#6]) MLSMR.tri phosphoric esters
+NP(=O)(N)N MLSMR.phosphoramide
+c1(c)c2c(c)cccc2ccc1 MLSMR.Phenalene
+c12:[c,n]:[c,n]:[c,n]:[c,n]:c1[c,n]c3:[c,n]:[c,n]:[c,n]:[c,n]:c3[c,n]2 MLSMR.(poly(azo(anthracene))
+c12:[c,n]:[c,n]:[c,n]:[c,n]:c1:[c,n]:[c,n]:c3:[c,n]:[c,n]:[c,n]:[c,n]:c23 MLSMR.(poly(azo(phenanthrene))
+a1aaac2ac3acac4aaac(c34)c12 MLSMR.Dye 31
+c12ccccc1C(=O)c3ccccc3C2=O MLSMR.Dye 4
+c12cccc(C(=O)N(&!@C)C(=O)3)c2c3ccc1 MLSMR.Dye 8
+C1[O,S,N]C1 MLSMR.epoxide, aziridine, thioepoxide
+C1(=O)OCC1 MLSMR.propiolactone
+N1CCC1=O MLSMR.b-lactam
+O=C1CCCC(N1)=O MLSMR.cycloheximide
+[#6,#7]-S(=O)(=O)Oc MLSMR.aromatic Sulfonic ester
+[$([o,n]=c1ccc(=[o,n])cc1),$([O,N]=C1C=CC(=[O,N])C=C1),$([O,N]=C1[#6]:,=[#6]C(=[O,N])[#6]:,=[#6]1)] MLSMR.quinone
+O1CCCCC1OC2CCC3CCCCC3C2 MLSMR.saponin
+O1CCCCC1C2CCCO2 MLSMR.monensin
+C12OCCC(O1)CC2 MLSMR.squalestatin
+[OH]c1cc([OH])cc2=[O+]C(=C([OH])Cc21)c3cc([OH])c([OH])cc3 MLSMR.cyanidin
+O=C1NCC2CCCCC21 MLSMR.cytochalasin
