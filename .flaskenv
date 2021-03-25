@@ -1,0 +1,2 @@
+FLASK_APP=smartsexplore
+FLASK_ENV=development

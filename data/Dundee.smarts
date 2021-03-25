@@ -1,0 +1,105 @@
+C(=O)O[C,H1].C(=O)O[C,H1].C(=O)O[C,H1] Dundee.> 2 ester groups
+n1c([F,Cl,Br,I])cccc1 Dundee.2-halo pyridine
+C(=O)[Cl,Br,I,F] Dundee.acid halide
+C=[C!r]O Dundee.acyclic C=C-O
+N#CC(=O) Dundee.acyl cyanide
+C(=O)N[NH2] Dundee.acyl hydrazine
+[CH1](=O) Dundee.aldehyde
+[R0;D2][R0;D2][R0;D2][R0;D2] Dundee.Aliphatic long chain
+[CX4][Cl,Br,I] Dundee.alkyl halide
+c1nnnn1C=O Dundee.amidotetrazole
+c1cc([NH2])ccc1 Dundee.aniline
+[CH2R2]1N[CH2R2][CH2R2][CH2R2][CH2R2][CH2R2]1 Dundee.azepane
+N=[N+]=[N-] Dundee.Azido group
+N#N Dundee.Azo group
+[CH2R2]1N[CH2R2][CH2R2][CH2R2][CH2R2][CH2R2][CH2R2]1 Dundee.azocane
+[cR2]1[cR2][cR2]([Nv3X3,Nv4X4])[cR2][cR2][cR2]1[cR2]2[cR2][cR2][cR2]([Nv3X3,Nv4X4])[cR2][cR2]2 Dundee.benzidine
+[C,c](=O)[CX4,CR0X3,O][C,c](=O) Dundee.beta-keto/anhydride
+C12C(NC(N1)=O)CSC2 Dundee.biotin analogue
+[C+,c+,C-,c-] Dundee.Carbocation/anion
+c1c([OH])c([OH,NH2,NH])ccc1 Dundee.catechol
+[O+,o+,S+,s+] Dundee.charged oxygen or sulfur atoms
+C1(=[O,N])C=CC(=[O,N])C=C1 Dundee.chinone
+C1(=[O,N])C(=[O,N])C=CC=C1 Dundee.chinone
+C=[C!r]C#N Dundee.conjugated nitrile group
+[OR2,NR2]@[CR2]@[CR2]@[OR2,NR2]@[CR2]@[CR2]@[OR2,NR2] Dundee.crown ether
+c1ccc2c(c1)ccc(=O)o2 Dundee.cumarine
+N[CH2]C#N Dundee.cyanamide
+[N,O,S]C#N Dundee.cyanate/aminonitrile/thiocyanate
+N#CC[OH] Dundee.cyanohydrins
+[CR2]1[CR2][CR2][CR2][CR2][CR2][CR2]1 Dundee.cycloheptane
+[CR2]1[CR2][CR2]cc[CR2][CR2]1 Dundee.cycloheptane
+[CR2]1[CR2][CR2][CR2][CR2][CR2][CR2][CR2]1 Dundee.cyclooctane
+[CR2]1[CR2][CR2]cc[CR2][CR2][CR2]1 Dundee.cyclooctane
+[cR2]1[cR2]c([N+0X3R0,nX3R0])c([N+0X3R0,nX3R0])[cR2][cR2]1 Dundee.diaminobenzene
+[cR2]1[cR2]c([N+0X3R0,nX3R0])[cR2]c([N+0X3R0,nX3R0])[cR2]1 Dundee.diaminobenzene
+[cR2]1[cR2]c([N+0X3R0,nX3R0])[cR2][cR2]c1([N+0X3R0,nX3R0]) Dundee.diaminobenzene
+[N!R]=[N!R] Dundee.diazo group
+[C,c](=O)[C,c](=O) Dundee.diketo group
+SS Dundee.disulphide
+[CX2R0][NX3R0] Dundee.enamine
+C(=O)Onnn Dundee.ester of HOBT
+C1(=O)OCC1 Dundee.four member lactones
+c1cc([Cl,Br,I,F])cc([Cl,Br,I,F])c1[Cl,Br,I,F] Dundee.halogenated ring
+c1ccc([Cl,Br,I,F])c([Cl,Br,I,F])c1[Cl,Br,I,F] Dundee.halogenated ring
+[Hg,Fe,As,Sb,Zn,Se,se,Te,B,Si] Dundee.heavy metal
+[NX3R0,NX4R0,OR0,SX2R0][CX4][NX3R0,NX4R0,OR0,SX2R0] Dundee.het-C-het not in ring
+C1NC(=O)NC(=O)1 Dundee.hydantoin
+N[NH2] Dundee.hydrazine
+[OH]c1ccc([OH,NH2,NH])cc1 Dundee.hydroquinone
+C(=O)N[OH] Dundee.hydroxamic acid
+C=[N!R] Dundee.imine
+N=[CR0][N,n,O,S] Dundee.imine
+I Dundee.iodine
+N=C=O Dundee.isocyanate
+[$([CH2]),$([CH][CX4]),$(C([CX4])[CX4])]=[$([CH2]),$([CH][CX4]),$(C([CX4])[CX4])] Dundee.isolated alkene
+C=C=O Dundee.ketene
+S1C=CSC1=S Dundee.methylidene-1,3-dithiole
+C=!@CC=[O,S] Dundee.Michael acceptor
+[$([CH]),$(CC)]#CC(=O)[C,c] Dundee.Michael acceptor
+[$([CH]),$(CC)]#CS(=O)(=O)[C,c] Dundee.Michael acceptor
+C=C(C=O)C=O Dundee.Michael acceptor
+[$([CH]),$(CC)]#CC(=O)O[C,c] Dundee.Michael acceptor
+[NX2,nX3][OX1] Dundee.N oxide
+s1c(S)nnc1NC=O Dundee.N-acyl-2-amino-5-mercapto-1,3,4-thiadiazole
+NC[F,Cl,Br,I] Dundee.N-C-halo
+[NX3,NX4][F,Cl,Br,I] Dundee.N-halo
+n[OH] Dundee.N-hydroxyl pyridine
+[N+](=O)[O-] Dundee.nitro group
+[#7]-N=O Dundee.N-nitroso
+[C,c]=N[OH] Dundee.oxime
+[C,c]=NOC=O Dundee.oxime
+[OR0,NR0][OR0,NR0] Dundee.Oxygen-nitrogen single bond
+[CX4](F)(F)[CX4](F)F Dundee.perfluorinated chain
+OO Dundee.peroxide
+c1ccccc1OC(=O)[#6] Dundee.phenol ester
+c1ccccc1OC(=O)O Dundee.phenyl carbonate
+P Dundee.phosphor
+[cR,CR]~C(=O)NC(=O)~[cR,CR] Dundee.phthalimide
+a1aa2a3a(a1)A=AA=A3=AA=A2 Dundee.Polycyclic aromatic hydrocarbon
+a21aa3a(aa1aaaa2)aaaa3 Dundee.Polycyclic aromatic hydrocarbon
+a31a(a2a(aa1)aaaa2)aaaa3 Dundee.Polycyclic aromatic hydrocarbon
+[CR0]=[CR0][CR0]=[CR0] Dundee.polyene
+[s,S,c,C,n,N,o,O]~[nX3+,NX3+](~[s,S,c,C,n,N])~[s,S,c,C,n,N] Dundee.quaternary nitrogen
+[s,S,c,C,n,N,o,O]~[n+,N+](~[s,S,c,C,n,N,o,O])(~[s,S,c,C,n,N,o,O])~[s,S,c,C,n,N,o,O] Dundee.quaternary nitrogen
+[*]=[N+]=[*] Dundee.quaternary nitrogen
+O1CCCCC1OC2CCC3CCCCC3C2 Dundee.saponine derivative
+[Si][F,Cl,Br,I] Dundee.silicon halogen
+c1ccccc1C=Cc2ccccc2 Dundee.stilbene
+[SX3](=O)[O-,OH] Dundee.sulfinic acid
+[C,c]S(=O)(=O)O[C,c] Dundee.Sulfonic acid
+S(=O)(=O)[O-,OH] Dundee.Sulfonic acid
+S(=O)(=O)C#N Dundee.sulfonyl cyanide
+[SX2]O Dundee.sulfur oxygen single bond
+OS(=O)(=O)[O-] Dundee.sulphate
+[SX2H0][N] Dundee.Sulphur-nitrogen single bond
+c12ccccc1(SC(S)=N2) Dundee.Thiobenzothiazole
+c12ccccc1(SC(=S)N2) Dundee.thiobenzothiazole
+[C,c]=S Dundee.Thiocarbonyl group
+SC=O Dundee.thioester
+[S-] Dundee.thiol
+[SH] Dundee.thiol
+*1[O,S,N]*1 Dundee.Three-membered heterocycle
+OS(=O)(=O)C(F)(F)F Dundee.triflate
+[SiR0,CR0](c1ccccc1)(c2ccccc2)(c3ccccc3) Dundee.triphenyl methylsilyl
+C#C Dundee.triple bond
