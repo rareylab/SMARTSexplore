@@ -1,5 +1,7 @@
 # SMARTSexplore
 
+![SMARTSexplore graph preview](https://user-images.githubusercontent.com/669103/112528427-6bf05e80-8da4-11eb-9dfc-e03f7db73664.png "SMARTSexplore graph preview")
+
 Welcome to the code repository of SMARTSexplore, a web-based
 interactive visual analysis app for the exploration of chemical
 pattern networks. SMARTSexplore was designed and developed in the
