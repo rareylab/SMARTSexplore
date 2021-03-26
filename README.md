@@ -1,4 +1,4 @@
-![documentation build](https://readthedocs.org/projects/smartsexplore/badge/?version=latest&style=for-the-badge)
+[![Documentation status](https://readthedocs.org/projects/smartsexplore/badge/?version=latest&style=for-the-badge)](https://smartsexplore.readthedocs.io/en/latest/)
 
 # SMARTSexplore
 
