@@ -1,3 +1,5 @@
+![documentation build](https://readthedocs.org/projects/smartsexplore/badge/?version=latest&style=for-the-badge)
+
 # SMARTSexplore
 
 ![SMARTSexplore graph preview](https://user-images.githubusercontent.com/669103/112528427-6bf05e80-8da4-11eb-9dfc-e03f7db73664.png "SMARTSexplore graph preview")
@@ -10,11 +12,11 @@ Molecular Design
 group](https://www.zbh.uni-hamburg.de/en/forschung/amd.html), Center
 for Bioinformatics, University of Hamburg, Germany.
 
-Note: *This README is copied and slightly adapted from the
+Note: *This README is copied and slightly adapted from a part of the
 documentation's user guide (see "Building documentation"). The steps
-below are only available here for convenience.  Please refer to the
-documentation for further instructions, as well as the full user guide
-and the developer guide.*
+below are only available here for convenience.  Please refer to [the
+documentation](https://smartsexplore.readthedocs.io/) for further
+instructions, as well as the full user guide and the developer guide.*
 
 
 # Installing the backend dependencies
