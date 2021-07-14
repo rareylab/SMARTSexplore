@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy import ForeignKey, Column, Integer, String, Float, UniqueConstraint
 
 
-"""The SQLAlchemy declarative_base instance that all SMARTSexplore models derive from"""
+# The SQLAlchemy declarative_base instance that all SMARTSexplore models derive from
 Base = declarative_base()
 
 
@@ -218,5 +218,3 @@ class Match(Base):
         """
         self.molecule = molecule
         self.smarts = smarts
-
-

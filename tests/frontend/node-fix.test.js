@@ -2,9 +2,8 @@ import { mount } from '@vue/test-utils'
 import { render, screen } from '@testing-library/vue'
 import { NodeFix } from '../../smartsexplore/frontend/components/node-fix'
 
-////////////////WORK IN PROGRESS////////////////////
 test('Node fixation setting shows up on screen correctly', () => {
-  let { queryByText } = render(NodeFix, {
+  render(NodeFix, {
     props: { modelValue: ''}
   });
   expect(screen.queryByText('hover')).toBeTruthy();

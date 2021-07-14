@@ -1,6 +1,6 @@
 /* Author: Simon Welker */
 import _ from 'lodash'
-import { Node, Edge, Graph, SimulatedGraph } from '../../smartsexplore/frontend/graph'
+import { Node, Edge, Graph } from '../../smartsexplore/frontend/graph'
 
 const nodeData = {
     id: 1,
@@ -168,8 +168,8 @@ describe('Edge', () => {
         const nodeA = new Node(nodeData);
         const nodeB = new Node(nodeData2);
         const myGetNodeFn = (id) => {
-            if(id == nodeData.id) return nodeA;
-            else if(id == nodeData2.id) return nodeB;
+            if(id === nodeData.id) return nodeA;
+            else if(id === nodeData2.id) return nodeB;
             else { throw new Error("myGetNodeFn was given an unknown id"); }
         }
 
@@ -458,7 +458,7 @@ describe('Graph', () => {
                 null, cbById,
                 null,
                 // only visit along "neighboring" nodes in the original C, CC, CCC, ... chain
-                (edge) => edge.source.id == edge.target.id + 1);
+                (edge) => edge.source.id === edge.target.id + 1);
             // should be N-1 calls in this chain
             expect(cb).toHaveBeenCalledTimes(nodes.length - 1);
         });
@@ -471,7 +471,7 @@ describe('Graph', () => {
                 null,
                 // only visit nodes which have even amount of 'C' in their pattern
                 null, (node) => {
-                    return _.countBy(node.pattern, (char) => char == 'C')[true] % 2 == 0
+                    return _.countBy(node.pattern, (char) => char === 'C')[true] % 2 === 0
                 });
             expect(cb).toHaveBeenCalledTimes(Math.floor(nodes.length / 2));
         });
@@ -510,8 +510,8 @@ describe('Graph', () => {
                 const B_CCs = _.map(nodesB, (node) => nodeToCC[node.id]);
                 expect(A_CCs[0]).toEqual(expect.anything());
                 expect(B_CCs[0]).toEqual(expect.anything());
-                expect(_.every(A_CCs, cc => cc == A_CCs[0])).toBe(true);
-                expect(_.every(B_CCs, cc => cc == B_CCs[0])).toBe(true);
+                expect(_.every(A_CCs, cc => cc === A_CCs[0])).toBe(true);
+                expect(_.every(B_CCs, cc => cc === B_CCs[0])).toBe(true);
                 expect(A_CCs[0]).not.toEqual(B_CCs[0]);
             });
 
@@ -539,8 +539,8 @@ describe('Graph', () => {
                     const B_CCs = _.map(nodesB, (node) => nodeToCC[node.id]);
                     expect(A_CCs[0]).toEqual(expect.anything());
                     expect(B_CCs[0]).toEqual(expect.anything());
-                    expect(_.every(A_CCs, cc => cc == A_CCs[0])).toBe(true);
-                    expect(_.every(B_CCs, cc => cc == A_CCs[0])).toBe(true);
+                    expect(_.every(A_CCs, cc => cc === A_CCs[0])).toBe(true);
+                    expect(_.every(B_CCs, cc => cc === A_CCs[0])).toBe(true);
                 });
             });
         });

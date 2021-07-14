@@ -232,7 +232,7 @@ const SmartsSubsetEdges = {
 
 const perObjectFn = {
     type: Function,
-    validator: (fn) => fn.length == 1
+    validator: (fn) => fn.length === 1
 };
 
 /**
@@ -240,7 +240,7 @@ const perObjectFn = {
  */
 const SmartsGraph = {
     name: 'SmartsGraph',
-    emits: ['nodeHover', 'edgeHover'],
+    emits: ['edgeClick', 'nodeClick', 'edgeHover', 'nodeHover', 'backgroundClick'],
     components: {
         ArrowheadMarkers, SmartsNodes, SmartsSubsetEdges
     },
@@ -254,49 +254,48 @@ const SmartsGraph = {
          * Only if the boolean is true, the class will be added to the node.
          * No classes by default.
          */
-        nodeClassFn:   { ...perObjectFn, default: (node) => {} },
+        nodeClassFn:   { ...perObjectFn, default: (_node) => {} },
         /** A function that returns a color given a node (white by default). */
-        nodeColorFn:   { ...perObjectFn, default: (node) => 'white' },
+        nodeColorFn:   { ...perObjectFn, default: (_node) => 'white' },
         /**
          * A function that returns a (key)->(value) CSS style mapping given a node.
          * No styles by default
          */
-        nodeStyleFn:   { ...perObjectFn, default: (node) => {} },
+        nodeStyleFn:   { ...perObjectFn, default: (_node) => {} },
         /**
          * A function that determines if a node is active
          * (shown, included in the layout and force simulation, visited during DFS)
          */
-        nodeActiveFn:  { ...perObjectFn, default: (node) => true },
+        nodeActiveFn:  { ...perObjectFn, default: (_node) => true },
 
         /**
          * A function that returns a (CSS class) -> (boolean) mapping given an edge.
          * Only if the boolean is true, the class will be added to the edge.
          * No classes by default.
          */
-        edgeClassFn:   { ...perObjectFn, default: (node) => {} },
+        edgeClassFn:   { ...perObjectFn, default: (_node) => {} },
         /** A function that returns a color given a node (black by default). */
         edgeColorFn:   {
             ...perObjectFn,
-            default: (edge) => 'black',
-            validator: (fn) => fn.length == 1 && fn.colors instanceof Array,
+            default: (_edge) => 'black',
+            validator: (fn) => fn.length === 1 && fn.colors instanceof Array,
         },
         /**
          * A function that returns a (key)->(value) CSS style mapping given an edge.
          * No styles by default
          */
-        edgeStyleFn:   { ...perObjectFn, default: (edge) => {} },
+        edgeStyleFn:   { ...perObjectFn, default: (_edge) => {} },
         /**
          * A function that determines if an edge is active
          * (shown, included in the layout and force simulation, traversed during DFS)
          */
-        edgeActiveFn:  { ...perObjectFn, default: (edge) => true },
+        edgeActiveFn:  { ...perObjectFn, default: (_edge) => true },
     },
     data() {
         return {
             isObjectSelectionFixed: false
         };
     },
-    emits: ['edgeClick', 'nodeClick', 'edgeHover', 'nodeHover', 'backgroundClick'],
     template: `
 <svg ref="graphSvg" width="100%" height="100%" @click.self="handleBackgroundClick">
     <defs>
@@ -355,7 +354,7 @@ const SmartsGraph = {
      * change (not deep-watching, so only triggers when these are replaced)
      */
     beforeMount() {
-        this.$watch(() => [this.graph, this.activeEdges], (newVal) => {
+        this.$watch(() => [this.graph, this.activeEdges], (_newVal) => {
             this.initGraphSimulation();
         }, { immediate: true });
     },
@@ -491,7 +490,7 @@ const SmartsGraph = {
          * Handles the user stopping to drag a node, by resetting the choice of nodes currently
          * active in the force simulation
          */
-        handleNodeDragEnd(nodeId) {
+        handleNodeDragEnd(_event) {
             if(this._prevSimNodes) {
                 this._simulation.nodes(this._prevSimNodes);
                 delete this._prevSimNodes;
@@ -504,7 +503,7 @@ const SmartsGraph = {
         /**
          * Handles the user double-clicking a node, by unfixing it
          */
-        handleNodeDblClick({ node, event }) {
+        handleNodeDblClick({ node, _event }) {
             const { id } = node;
             const { simulacrum } = this._simulatedGraph;
             const simNode = simulacrum.getNodeById(id);

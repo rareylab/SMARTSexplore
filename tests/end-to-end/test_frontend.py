@@ -20,7 +20,7 @@ def full_running_server(full_app, caplog):
     def run():
         return full_app.run(host=HOST, port=PORT)
 
-    caplog.set_level(logging.INFO) # -- uncomment if debugging Webdriver / Testserver bugs
+    caplog.set_level(logging.INFO)
     import multiprocessing
     proc = multiprocessing.Process(target=run)
     proc.start()
@@ -93,7 +93,7 @@ def test_smarts_objects_are_rendered_and_colored(driver, full_session):
 
 
 def test_node_dragging(driver):
-    time.sleep(3)  # wait for simulation to relax
+    time.sleep(10)  # wait for simulation to relax
     node = driver.find_element_by_css_selector('circle[data-id="447"]')
     node2 = driver.find_element_by_css_selector('circle[data-id="578"]')
     cx, cy = node.get_attribute('cx'), node.get_attribute('cy')
@@ -106,7 +106,7 @@ def test_node_dragging(driver):
     cx_new, cy_new = node.get_attribute('cx'), node.get_attribute('cy')
     cx2_new, cy2_new = node2.get_attribute('cx'), node2.get_attribute('cy')
     assert cx_new != cx
-    assert cy_new == cy
+    assert abs(float(cy_new) - float(cy)) < 1
     # This should also have moved the neighboring node
     assert cx2_new != cx2
     assert cy2_new != cy2
@@ -114,10 +114,10 @@ def test_node_dragging(driver):
     # Simulate another dragging action (in y)
     action = ActionChains(driver)
     action.click_and_hold(node).move_by_offset(0, 10).release().perform()
-    time.sleep(1)  # let simulation relax
+    time.sleep(5)  # let simulation relax
     cx_new2, cy_new2 = node.get_attribute('cx'), node.get_attribute('cy')
     cx2_new2, cy2_new2 = node2.get_attribute('cx'), node2.get_attribute('cy')
-    assert cx_new2 == cx_new
+    assert abs(float(cx_new2) - float(cx_new)) < 1
     assert cy_new2 != cy_new
     assert cx_new2 != cx
     assert cy_new2 != cy
@@ -153,7 +153,7 @@ def test_upload_molecule_file(driver: webdriver.Chrome):
 
         file_input = driver.find_element_by_css_selector('.upload-box input[type="file"]')
         driver.execute_script(js_code, file_input)
-        time.sleep(5)  # eh... might be better to wait for something. but what?
+        time.sleep(5)  # wait for code execution
 
         # Expect that the fill of the node changed :)
         some_node_fill_new = some_node.get_attribute('fill')

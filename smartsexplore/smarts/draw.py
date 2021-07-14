@@ -8,6 +8,8 @@ import os
 from typing import Iterable
 from pathlib import Path
 
+from tqdm.contrib.concurrent import process_map
+
 from smartsexplore.database import DirectedEdge, SMARTS
 from smartsexplore.util import run_process
 
@@ -66,7 +68,6 @@ def draw_multiple_smarts(smarts: Iterable[SMARTS], viewer_path: str, output_path
     :param viewer_path: The path to a SMARTScompareViewer binary.
     :param output_path: The output path to store the rendered SMARTS SVGs in.
     """
-    from tqdm.contrib.concurrent import process_map
     return process_map(
         functools.partial(draw_one_smarts, viewer_path=viewer_path, output_path=output_path),
         smarts,
@@ -85,7 +86,6 @@ def draw_multiple_smarts_subset_relations(directed_edges: Iterable[DirectedEdge]
     :param viewer_path: The path to a SMARTScompareViewer binary.
     :param output_path: The output path to store the rendered subset relation SVGs in.
     """
-    from tqdm.contrib.concurrent import process_map
     return process_map(
         functools.partial(draw_one_smarts_subset_relation,
                           viewer_path=viewer_path, output_path=output_path),

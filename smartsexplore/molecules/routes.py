@@ -76,16 +76,16 @@ def upload_molecule_set():
     plain_file = request.files['file']
     try:
         file = _check_valid_file(plain_file)
-    except ValueError as e:
-        return {'error': str(e)}, 400
+    except ValueError as error:
+        return {'error': str(error)}, 400
 
     mol_set = None
     try:
         mol_set = calculate_molecule_matches(file)
         draw_molecules_from_molset(mol_set)
         return redirect(url_for('molecules.matches_for_molecule_set', id=mol_set.id))
-    except Exception as e:
-        logging.error(e)
+    except Exception as exception:
+        logging.error(exception)
         if mol_set is not None:
             session = get_session()
             session.delete(mol_set)

@@ -47,18 +47,18 @@ def get_session():
     :returns: A (potentially scoped) SQLAlchemy session to the app database, see above.
     """
     if not g:
-        engine, sm = get_db()
+        _engine, sm = get_db()
         session = sm()
         return session
-    else:
-        if 'session' not in g:
-            engine, sm = get_db()
-            session = scoped_session(sm)
-            g.session = session
-        return g.session
+
+    if 'session' not in g:
+        _engine, sm = get_db()
+        session = scoped_session(sm)
+        g.session = session
+    return g.session
 
 
-def close_session(e=None):
+def close_session(_e=None):
     """
     Closes the current SQLAlchemy session to the app database, if one was opened.
     """
@@ -115,7 +115,6 @@ class NoSMARTSException(Exception):
     """
     Raised by :func:`write_smarts_to_tempfile` if no SMARTS are available to write.
     """
-    pass
 
 
 def write_smarts_to_tempfile() -> tempfile.NamedTemporaryFile:
@@ -126,7 +125,6 @@ def write_smarts_to_tempfile() -> tempfile.NamedTemporaryFile:
     :returns: A file handle to the written temporary .smarts file.
     :raises: :class:`NoSMARTSException`, if there are no SMARTS to be written.
     """
-    import tempfile
     session = get_session()
     smartss = session.query(SMARTS).all()
 

@@ -41,7 +41,7 @@ class Node {
         this.meta = {};
         Object.assign(this.meta, _.cloneDeep(defaultMeta));
     }
-};
+}
 
 /**
  * Represents an edge in a SMARTS graph. Stored properties are:
@@ -100,7 +100,7 @@ class Edge {
         this.meta = {};
         Object.assign(this.meta, _.cloneDeep(defaultMeta));
     }
-};
+}
 
 /**
  * A directed graph consisting of Node obejcts and Edge objects.
@@ -198,7 +198,12 @@ class Graph {
      *   every visited node, with arguments: (visited node {Node}, current DFS depth {Number}).
      * @param {Function} visitedEdgeCallback (optional) A callback that will be called for
      *   every traversed edge, with arguments: (traversed edge {Edge}, edge outgoing? {Boolean})
-     * TODO document new params
+     * @param {Function} beforeVisitCallback (optional) A callback that will be called before
+     *   traversing any node, with arguments: (visited node {Node}, has been visited? {Boolean})
+     * @param {Function} edgeFilter (optional) A function to filter which edges will be traversed,
+     *   which is called with an edge {Edge}
+     * @param {Function} nodeFilter (optional) A function to filter which nodes will be visited,
+     *   which is called with a node {Node}
      */
     runDFS(startNodes, direction, maxDepth,
            visitedNodeCallback=null, visitedEdgeCallback=null, beforeVisitCallback=null,
@@ -231,12 +236,12 @@ class Graph {
             _.each(node[edgeProp], function(edge) {
                 if(edgeFilter && !edgeFilter(edge)) return;
 
-                let isOutgoing = edge.source == node;
+                let isOutgoing = edge.source === node;
                 let otherNode = isOutgoing ? edge.target : edge.source;
                 if(
-                    ( isOutgoing && direction == 'outgoing') ||
-                    (!isOutgoing && direction == 'incoming') ||
-                    (direction == 'all')
+                    ( isOutgoing && direction === 'outgoing') ||
+                    (!isOutgoing && direction === 'incoming') ||
+                    (direction === 'all')
                 ) {
                     if(visitedEdgeCallback) visitedEdgeCallback(edge, isOutgoing);
                     visitNode(otherNode, depth+1);
@@ -301,9 +306,8 @@ class Graph {
      * @param {Function} nodeFilter (optional) a predicate to filter which nodes will be visited
      */
     setPositionsFromCCs(edgeFilter, nodeFilter) {
-        // TODO: more flexibility in layout (especially offsets)
-        let [ccs, nodeToCC] = this.getCCs(edgeFilter, nodeFilter);
-        ccs = _.sortBy(Object.values(ccs), cc => -cc.length); // TODO also consider identical edges?
+        let [ccs, _nodeToCC] = this.getCCs(edgeFilter, nodeFilter);
+        ccs = _.sortBy(Object.values(ccs), cc => -cc.length);
         let [ccsMultiple, ccsSingle] = _.partition(ccs, cc => cc.length >= 2);
 
         // Multiple nodes per CC
@@ -399,7 +403,7 @@ class Graph {
             }
             lookup[(l.id + ',' + r.id)] = edge;
             return !reverseEdge;
-        }), (e) => e.type == 'equal' ? 1 : 0); // sort equal edges to last positions
+        }), (e) => e.type === 'equal' ? 1 : 0); // sort equal edges to last positions
     }
 }
 

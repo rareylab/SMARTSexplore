@@ -67,7 +67,7 @@ const RangeSlider = {
             }
         });
         // triggered on end when handle is let go
-        this.$refs.slider.noUiSlider.on('end', (values, handle) => {
+        this.$refs.slider.noUiSlider.on('end', (values, _handle) => {
             this.$emit('update:modelValue', _.map(values, Number));
         });
     },

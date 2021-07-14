@@ -10,6 +10,7 @@ Exposes commands for:
     * drawing SMARTS and SMARTS-SMARTS in the SMARTSViewer visual language
       (:func:`draw_all_smarts_command`, :func:`draw_all_subsets_command`)
 """
+import os
 
 import click
 from flask import current_app, Blueprint
@@ -42,8 +43,6 @@ def draw_all_smarts_command():
     This is a required action before serving the application in
     production, for the frontend to work correctly.
     """
-    import os
-
     session = get_session()
     all_smarts = session.query(SMARTS).all()
     viewer_path = current_app.config['SMARTSCOMPARE_VIEWER_PATH']
@@ -63,8 +62,6 @@ def draw_all_subsets_command():
     This is a required action before serving the application in
     production, for the frontend to work correctly.
     """
-    import os
-
     session = get_session()
     all_edges = session.query(DirectedEdge).options(
         subqueryload(DirectedEdge.from_smarts),
@@ -94,7 +91,7 @@ def add_library_command(name, filename):
             f"Are you sure you want to add them? Enter Y to continue [y/N] ")
         if answer.lower() != 'y':
             click.echo(f"{name} was *not* inserted.")
-            return
+            return None
 
     return add_library(name, filename)
 
@@ -105,8 +102,6 @@ def add_libraries_command(file_names):
     """
     Add multiple SMARTS libraries at once, taking the library names from the filenames
     """
-    import os
-
     base_names = [os.path.basename(file_name) for file_name in file_names]
     lib_names = [base_name.rpartition('.smarts')[0] for base_name in base_names]
 

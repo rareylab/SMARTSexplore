@@ -26,7 +26,7 @@ const MatchesGrid = {
             validator: (val) => _.every(val,
                 (match) => 'molecule_name' in match && 'molecule_id' in match
                     && typeof match.molecule_name == 'string'
-                    && (match.molecule_id|0) == match.molecule_id
+                    && (match.molecule_id|0) === match.molecule_id
             )
         },
         /**
@@ -36,7 +36,7 @@ const MatchesGrid = {
          */
         classFn: {
             type: Function,
-            default: (match) => ''
+            default: (_match) => ''
         }
     },
     template: `
@@ -46,7 +46,7 @@ const MatchesGrid = {
         :title="match.molecule_name"
     >
         <label>{{ match.molecule_name }}</label>
-        <img :src="getMoleculeImageURL(match.molecule_id)" />
+        <img alt="molecule image" :src="getMoleculeImageURL(match.molecule_id)" />
     </span>
 </div>
 `,
@@ -135,8 +135,8 @@ const SmartsSubsetEdgeInfo = {
         return {
             /** Used for highlighting the matches */
             matchClassFn(match) {
-                if(match.kind == 'common') { return 'common-match' };
-                if(match.kind == 'different') { return 'different-match' }
+                if(match.kind === 'common') { return 'common-match' }
+                if(match.kind === 'different') { return 'different-match' }
             }
         }
     },
@@ -290,7 +290,7 @@ const InfoBox = {
             }
             this.$nextTick(updatePreviewTranslateExtent); // call once when DOM is fully ready
             this._windowSelector = d3.select(window);
-            this._windowSelector.on('resize', function(event) { // call again on each window resize
+            this._windowSelector.on('resize', function() { // call again on each window resize
                 updatePreviewTranslateExtent();
             });
 
@@ -299,8 +299,8 @@ const InfoBox = {
             selector
                 .call(zoom)
                 .on('dblclick.zoom', null)
-                .on('start', () => this.$emit('previewZoomStart'))  // TODO document these events
-                .on('end', () => this.$emit('previewZoomEnd'))  // TODO also have them have the effect of locking the update
+                .on('start', () => this.$emit('previewZoomStart'))
+                .on('end', () => this.$emit('previewZoomEnd'))
 
             this.previewZoom = { zoom, selector };
         },

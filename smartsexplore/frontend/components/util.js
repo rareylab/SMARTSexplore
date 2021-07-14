@@ -32,7 +32,7 @@ const Pluralize = {
     props: {
         count: {
             type: Number,
-            validator: (num) => (num | 0) == num  // verify that it's an integer
+            validator: Number.isInteger  // verify that it's an integer
         },
         string: String,
         pluralString: String

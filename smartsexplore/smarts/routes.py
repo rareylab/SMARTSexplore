@@ -33,7 +33,8 @@ def data():
     if request.method == 'GET':
         generated_graph = to_json.from_db(min_similarity=0, max_similarity=1)
         return generated_graph
-    elif request.method == 'POST' and\
+
+    if request.method == 'POST' and\
             request.is_json\
             and 'spsim_min' in request.json.keys()\
             and 'spsim_max' in request.json.keys():
@@ -41,9 +42,9 @@ def data():
         sim_max = float(request.json['spsim_max'])
         generated_graph = to_json.from_db(min_similarity=sim_min, max_similarity=sim_max)
         return generated_graph
-    else:
-        error_json = {'error': 'Invalid request.'}
-        return jsonify(error_json), 400
+
+    error_json = {'error': 'Invalid request.'}
+    return jsonify(error_json), 400
 
 
 def deliver_smartsview(id: int):

@@ -3,6 +3,10 @@ Functions that interact with the database and external programs to manage SMARTS
 match data.
 """
 import logging
+import os
+import re
+import sys
+import tempfile
 
 import click
 from flask import current_app
@@ -10,6 +14,7 @@ from flask import current_app
 from smartsexplore.database import SMARTS, get_session, write_smarts_to_tempfile, UndirectedEdge, \
     DirectedEdge, NoSMARTSException
 from smartsexplore.parsers import parse_smartscompare
+from smartsexplore.util import run_process
 
 
 def add_library(name: str, filename: str) -> None:
@@ -24,10 +29,9 @@ def add_library(name: str, filename: str) -> None:
     :param name: The name of the library to add. Will be stored on the created SMARTS instances.
     :param filename: The filename of the .smarts file to create and store SMARTS from.
     """
-    import re
     session = get_session()
 
-    with open(filename, 'r') as stream:  # TODO maybe some line documentation
+    with open(filename, 'r') as stream:
         ignored_lines = []
         nof_added_smarts = 0
         for i, line in enumerate(stream):
@@ -62,9 +66,6 @@ def calculate_edges(mode):
     similarity value lower bound; otherwise a too large number of
     edges for our purposes would (generally) be generated.
     """
-    import tempfile, os, sys
-    from smartsexplore.util import run_process
-
     # Check validity of chosen mode
     implemented_modes = ('Similarity', 'SubsetOfFirst')
     if mode not in implemented_modes:
@@ -113,12 +114,12 @@ def calculate_edges(mode):
     duplicate_edges = []
 
     # Define a function to check for duplicates
-    def _check_for_duplicates(l, r):
-        if (l, r) in existing_edges:
-            duplicate_edges.append((l, r))
+    def _check_for_duplicates(left, right):
+        if (left, right) in existing_edges:
+            duplicate_edges.append((left, right))
             return True
-        else:
-            return False
+
+        return False
 
     # Different loops and logic based on mode
     if mode == 'Similarity':
@@ -137,7 +138,7 @@ def calculate_edges(mode):
                 session.add(edge)
                 nof_added_edges += 1
     elif mode == 'SubsetOfFirst':
-        for (line_no, lname, rname, mcssim, spsim) in parse_iterator:
+        for (_line_no, lname, rname, mcssim, spsim) in parse_iterator:
             lsmarts = session.query(SMARTS).filter_by(id=int(lname)).first()
             rsmarts = session.query(SMARTS).filter_by(id=int(rname)).first()
             fromsmarts, tosmarts = rsmarts, lsmarts
@@ -164,9 +165,10 @@ def _get_existing_edges(mode, session):
         return set(
             (e.low_id, e.high_id) for e in session.query(UndirectedEdge).all()
         )
-    elif mode == 'SubsetOfFirst':
+
+    if mode == 'SubsetOfFirst':
         return set(
             (e.from_id, e.to_id) for e in session.query(DirectedEdge).all()
         )
-    else:
-        raise ValueError(f"Unimplemented mode: {mode}")
+
+    raise ValueError(f"Unimplemented mode: {mode}")

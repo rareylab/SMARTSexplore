@@ -1,12 +1,10 @@
-import { render, screen, fireEvent } from '@testing-library/vue'
+import { render, screen } from '@testing-library/vue'
 import { mount } from '@vue/test-utils'
 
 import { UploadBox } from '../../smartsexplore/frontend/components/upload-box'
 
-///////////////WORK IN PROGRESS////////////////////////
-
 test('Upload Box renders correctly on screen', () => {
-  let { queryByText } = render(UploadBox, {
+  render(UploadBox, {
     props: { message: '', targetURL: '/' }
   });
   //check whether screen shows message containing molecule file

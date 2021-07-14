@@ -12,7 +12,7 @@ const NodeFix = {
             <label>
                 <input class="with-gap" type="radio" name="mode" value="hover"
                     @change="$emit('update:modelValue', $event.target.value)"
-                    :checked="modelValue=='hover'"/>
+                    :checked="modelValue==='hover'"/>
                 <span>hover</span>
             </label>
         </div>
@@ -20,7 +20,7 @@ const NodeFix = {
             <label>
                 <input class="with-gap" type="radio" name="mode" value="click"
                     @change="$emit('update:modelValue', $event.target.value)"
-                    :checked="modelValue=='click'" />
+                    :checked="modelValue==='click'" />
                 <span>click</span>
             </label>
         </div>

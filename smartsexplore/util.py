@@ -34,16 +34,16 @@ def run_process(cmd, timeout=None, stdout=None, stderr=None, reraise_exceptions=
         )
         if process.returncode != 0:
             raise Exception("Return code != 0, it is " + str(process.returncode))
-    except Exception as e:
+    except Exception as exception:
         if process is not None:
-            logging.error("Process FAILED during runtime. Command was:" + " ".join(cmd))
+            logging.error("Process FAILED during runtime. Command was: %s", " ".join(cmd))
             logging.error("Output on standard out:")
             logging.error(process.stdout.decode('utf-8'))
             logging.error("Output on standard error:")
             logging.error(process.stderr.decode('utf-8'))
         else:
-            logging.error("Process FAILED starting up. Command was:" + " ".join(cmd))
+            logging.error("Process FAILED starting up. Command was: %s", " ".join(cmd))
 
         if reraise_exceptions:
-            raise e
+            raise exception
     return process

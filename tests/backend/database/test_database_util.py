@@ -43,7 +43,7 @@ def test_molecule_tempfile(session):
         molecule = Molecule(pattern=pattern, name=f'mol{i}', molset=molset)
         session.add(molecule)
     session.commit()
-    molfile, line_num = molecules_to_temporary_smiles_file(session.query(Molecule).all())
+    molfile, _line_num = molecules_to_temporary_smiles_file(session.query(Molecule).all())
     molfile.seek(0)
     lines = molfile.readlines()
     striplines = [line.strip() for line in lines]  # ignore whitespace, useful for last line tests

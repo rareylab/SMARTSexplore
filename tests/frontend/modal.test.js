@@ -1,8 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/vue'
-import { mount } from '@vue/test-utils'
+import { render, screen } from '@testing-library/vue'
 import { Modal } from '../../smartsexplore/frontend/components/modals'
-
-///////////////WORK IN PROGRESS////////////////////////
 
 const WrapperComponent = {
   components: { Modal },
@@ -14,7 +11,7 @@ const WrapperComponent = {
 };
 
 test('Modal renders button text and modal content', () => {
-  let { container, queryAllByText } = render(WrapperComponent);
+  render(WrapperComponent);
   //check whether screen shows message containing "info"
   expect(screen.queryAllByText(/click this!/i)).toBeTruthy();
   expect(screen.queryAllByText(/test modal content/i)).toBeTruthy();

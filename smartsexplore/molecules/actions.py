@@ -3,6 +3,9 @@ Functions that interact with the database and external programs to manage molecu
 molecule-SMARTS match data.
 """
 import logging
+import tempfile
+import sys
+
 from typing import BinaryIO
 
 from flask import current_app
@@ -10,6 +13,7 @@ from flask import current_app
 from smartsexplore.database import get_session, MoleculeSet, Molecule, SMARTS, Match, \
     write_smarts_to_tempfile, molecules_to_temporary_smiles_file, NoSMARTSException
 from smartsexplore.parsers import parse_moleculematch
+from smartsexplore.util import run_process
 
 
 def create_molecules_from_smiles_file(file: BinaryIO) -> MoleculeSet:
@@ -43,7 +47,7 @@ def create_molecules_from_smiles_file(file: BinaryIO) -> MoleculeSet:
         session.add(molecule)
         nof_mol += 1
     session.commit()
-    logging.info(f"Added {nof_mol} Molecules to the database.")
+    logging.info("Added %s Molecules to the database.", nof_mol)
     return molset
 
 
@@ -54,9 +58,6 @@ def calculate_molecule_matches(uploaded_molecules_file: BinaryIO) -> MoleculeSet
 
     :param uploaded_molecules_file: An open file handle to a molecule file to match
     """
-    import tempfile
-    import sys
-    from smartsexplore.util import run_process
     moleculefile, smartsfile, moleculematchfile = [None] * 3
 
     # get all SMARTS patterns in file
@@ -96,12 +97,12 @@ def calculate_molecule_matches(uploaded_molecules_file: BinaryIO) -> MoleculeSet
         # Commit the session
         session.commit()
         return mol_set
-    except Exception as e:
+    except Exception as exception:
         if mol_set is not None:  # clean up molset if exception occurred
             session = get_session()
             session.delete(mol_set)
             session.commit()
-        raise e
+        raise exception
     finally:  # close all open file handles
         if uploaded_molecules_file:
             uploaded_molecules_file.close()

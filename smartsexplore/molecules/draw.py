@@ -1,13 +1,15 @@
 """
 Functions for drawing molecule structure diagrams. Uses the ``mol2svg`` NAOMI tool for this purpose.
 """
-
+import os
 import math
+import shutil
 import tempfile
 
 from flask import current_app
 
 from smartsexplore.database import MoleculeSet, molecules_to_temporary_smiles_file
+from smartsexplore.util import run_process
 
 
 def draw_molecules_from_molset(molset: MoleculeSet) -> None:
@@ -20,9 +22,6 @@ def draw_molecules_from_molset(molset: MoleculeSet) -> None:
 
     :param molset: The MoleculeSet instance to render all molecules of.
     """
-    import os
-    import shutil
-    from smartsexplore.util import run_process
 
     molfile, line_no_to_molecule_id =\
         molecules_to_temporary_smiles_file(molset.molecules)

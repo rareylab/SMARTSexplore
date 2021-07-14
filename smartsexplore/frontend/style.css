@@ -177,7 +177,7 @@ body, .graph-app {
     padding: 1rem;
 }
 .settings-container .collapsible-body .row:last-of-type {
-    margin-bottom: 2px; /* TODO oddly specific but ok */
+    margin-bottom: 2px; /* oddly specific but ok */
 }
 
 .settings-container .row.search {

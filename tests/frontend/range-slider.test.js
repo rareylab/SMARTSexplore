@@ -2,8 +2,6 @@ import { render, fireEvent } from '@testing-library/vue'
 import _ from 'lodash';
 import { RangeSlider } from '../../smartsexplore/frontend/components/range-slider'
 
-//////////////////WORK IN PROGRESS/////////////////////////////////
-
 test('Range slider renders with default properties', () => {
   let { queryByText, container } = render(RangeSlider, {
     props: { modelValue: [], min: 0, max: 1.0, step: 0.01, startMin: 0.65, startMax: 1.0}

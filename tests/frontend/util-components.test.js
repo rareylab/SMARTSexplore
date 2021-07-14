@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/vue'
+import { render } from '@testing-library/vue'
 import { Pluralize } from '../../smartsexplore/frontend/components/util'
 
 test('Pluralize renders text with reasonable defaults', () => {

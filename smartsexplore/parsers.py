@@ -18,7 +18,8 @@ def parse_smartscompare(iterable):
     for i, line in enumerate(iterable):
         if i < 2:
             continue
-        elif i == 2:
+
+        if i == 2:
             _, _, mode = line.rpartition(' ')
             mode = mode.strip().replace("'", "")
             if mode not in valid_modes:
@@ -26,30 +27,30 @@ def parse_smartscompare(iterable):
                                  f'one of [{", ".join(valid_modes)}].')
             yield mode
             continue
-        else:
-            # Split on ^ to separate into pieces (lpattern`ltag)^(sim`rpattern`rtag)
-            left, right = line.split('|')
-            # Split (lpattern`ltag) into pattern and tag
-            lpattern, ltag = left.split('`')
-            # Split (sim`rpattern`rtag) into similarities, pattern, and tag
-            similarities, rpattern, rtag = right.split('`')
 
-            # Remove whitespace & parentheses around the label
-            ltag, rtag = ltag.strip()[1:-1], rtag.strip()[1:-1]
-            lname_, rname_ = ltag.split(maxsplit=1), rtag.split(maxsplit=1)
+        # Split on ^ to separate into pieces (lpattern`ltag)^(sim`rpattern`rtag)
+        left, right = line.split('|')
+        # Split (lpattern`ltag) into pattern and tag
+        _lpattern, ltag = left.split('`')
+        # Split (sim`rpattern`rtag) into similarities, pattern, and tag
+        similarities, _rpattern, rtag = right.split('`')
 
-            lname = lname_[0] if len(lname_) == 1 else (lname_[1] if len(lname_) == 2 else _fail())
-            rname = rname_[0] if len(rname_) == 1 else (rname_[1] if len(rname_) == 2 else _fail())
+        # Remove whitespace & parentheses around the label
+        ltag, rtag = ltag.strip()[1:-1], rtag.strip()[1:-1]
+        lname_, rname_ = ltag.split(maxsplit=1), rtag.split(maxsplit=1)
 
-            # Split the similarity string (a,b) on comma, while ignoring (a,b,[...])
-            # Currently the ignored part could only be "sub", which does not give us
-            # any additional information since we know the mode
-            mcssim_, spsim_, *_ = similarities.split(',')
-            mcssim_, spsim_ = mcssim_.strip().replace("(", ""), spsim_.strip().replace(")", "")
-            # Cut off the ( and ), parse each piece as a float
-            mcssim, spsim = float(mcssim_), float(spsim_)
+        lname = lname_[0] if len(lname_) == 1 else (lname_[1] if len(lname_) == 2 else _fail())
+        rname = rname_[0] if len(rname_) == 1 else (rname_[1] if len(rname_) == 2 else _fail())
 
-            yield (i+1, lname, rname, mcssim, spsim)
+        # Split the similarity string (a,b) on comma, while ignoring (a,b,[...])
+        # Currently the ignored part could only be "sub", which does not give us
+        # any additional information since we know the mode
+        mcssim_, spsim_, *_ = similarities.split(',')
+        mcssim_, spsim_ = mcssim_.strip().replace("(", ""), spsim_.strip().replace(")", "")
+        # Cut off the ( and ), parse each piece as a float
+        mcssim, spsim = float(mcssim_), float(spsim_)
+
+        yield (i+1, lname, rname, mcssim, spsim)
 
 
 def parse_moleculematch(iterable):

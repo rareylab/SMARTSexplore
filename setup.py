@@ -47,7 +47,7 @@ setup(
 
         'pytest==6.2.2',            # our testing framework
         'pytest-cov==2.11.1',       # for generating coverage from pytest
-        'selenium==3.141.0'         # for end-to-end tests
+        'selenium'         # for end-to-end tests
     ] + sphinx_deps + [             # our documentation generator
         'sphinx_rtd_theme==0.5.1',  # for styling the documentation HTML output like readthedocs.io
         'recommonmark==0.7.1',      # for using Markdown in the documentation (esp. for the guides)

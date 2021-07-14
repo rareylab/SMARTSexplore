@@ -358,8 +358,7 @@ const appDescription = {
                 const ok = response.ok;
 
                 if(ok) {
-                    const graph = this.initGraph(json.nodes, json.edges);
-                    this.graph = graph;
+                    this.graph = this.initGraph(json.nodes, json.edges);
                 }
                 else {
                     throw new Error(json.error || String(response.status));
@@ -379,8 +378,8 @@ const appDescription = {
          * Handles users hovering over an edge: if selectOn == 'hover', sets the selected object
          * to be the hovered edge.
          */
-        handleEdgeHover({ edge, event }) {
-            if(this.settings.selectOn == 'hover'){
+        handleEdgeHover({ edge, _event }) {
+            if(this.settings.selectOn === 'hover'){
                 this.selectedObject = edge;
             }
         },
@@ -388,8 +387,8 @@ const appDescription = {
          * Handles users clicking an edge: if selectOn == 'click', sets the selected object
          * to be the clicked edge.
          */
-        handleEdgeClick({ edge, event }) {
-            if(this.settings.selectOn == 'click'){
+        handleEdgeClick({ edge, _event }) {
+            if(this.settings.selectOn === 'click'){
                 this.selectedObject = edge;
             }
         },
@@ -417,7 +416,7 @@ const appDescription = {
                 );
             }
 
-            if(this.settings.selectOn  == 'hover'){
+            if(this.settings.selectOn  === 'hover'){
                 this.selectedObject = node;
             }
         },
@@ -425,8 +424,8 @@ const appDescription = {
          * Handles users clicking a node: if selectOn == 'click', sets the selected object
          * to be the clicked node.
          */
-        handleNodeClick({ node, event }) {
-            if(this.settings.selectOn == 'click') {
+        handleNodeClick({ node, _event }) {
+            if(this.settings.selectOn === 'click') {
                 this.selectedObject = node;
             }
         },
@@ -489,7 +488,7 @@ const appDescription = {
          * Watches 'graphLibraries' and keeps the library selection up to date, by dropping removed
          * libraries and adding new libraries with a default 'true' value for the selection
          */
-        graphLibraries(newVal, oldVal) {
+        graphLibraries(newVal, _oldVal) {
             // If the list of graph libraries changes, update the library selection accordingly:
             const sel = this.settings.librarySelection;
             //  - if new libraries were added, set their selection to 'true'
@@ -507,7 +506,7 @@ const appDescription = {
          * Watches 'searchString' to parse it as a regular expression, updates 'searchRegexp' if
          * parsing is successful, and sets an error flag if parsing fails.
          */
-        'settings.searchString': function(newVal, oldVal) {
+        'settings.searchString': function(newVal, _oldVal) {
             try {
                 const regexp = new RegExp(newVal, 'i');
                 this.settings._searchStringError = false;
@@ -531,10 +530,6 @@ const app = Vue.createApp(appDescription);
 
 ////////// SETTINGS CONTAINER //////////
 
-app.component('collapsible', {
-    // TODO
-});
-
 app.component('settings', {
     name: 'settings',
     components: { RangeSlider, NodeFix, UploadBox, InfoButton, AboutButton },
@@ -544,7 +539,7 @@ app.component('settings', {
         libraryToColor: Object,
         colorMap: {
             type: Function,
-            validator: (fn) => fn.length == 1 && fn.colors instanceof Array
+            validator: (fn) => fn.length === 1 && fn.colors instanceof Array
         },
         matchesLoaded: Boolean
     },
@@ -566,8 +561,7 @@ app.component('settings', {
             return (1 / this.colorMap.colors.length) * 100 + '%';
         },
         libraryIDs() {
-            let result = _.sortBy(Object.keys(this.s.librarySelection));
-            return result;
+            return _.sortBy(Object.keys(this.s.librarySelection));
         }
     },
     mounted() {
@@ -597,7 +591,7 @@ app.component('settings', {
             <div class="collapsible-header">
                 <i class="material-icons">info_outline</i>Info
             </div>
-            <div class="collapsible-body">
+            <div class="collapsible-body">return result;
                 <div class="row info">
                     <label>SMARTSexplore is a network analysis tool [...]</label>
                     <div class="row info button">
@@ -656,7 +650,7 @@ app.component('settings', {
                         </label>
 
                         <div class="row">
-                            <!-- FIXME horribly hacky, but what else should we do with this MaterializeCSS selector? -->
+                            <!-- horribly hacky MaterializeCSS checkbox -->
                             <div class="col s12 l6 library-selector" v-for="libraryID in libraryIDs">
                                 <component is="style">
                                     [type=checkbox]#__library-checkbox-{{ libraryID }}:checked + span::after {
