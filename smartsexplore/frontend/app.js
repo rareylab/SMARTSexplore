@@ -591,7 +591,7 @@ app.component('settings', {
             <div class="collapsible-header">
                 <i class="material-icons">info_outline</i>Info
             </div>
-            <div class="collapsible-body">return result;
+            <div class="collapsible-body">
                 <div class="row info">
                     <label>SMARTSexplore is a network analysis tool [...]</label>
                     <div class="row info button">
