@@ -16,10 +16,7 @@ from flask import current_app, Blueprint
 from flask.cli import with_appcontext
 from sqlalchemy.orm import subqueryload
 
-import sys
-sys.path.append('backend')
-
-from database import get_session, SMARTS, DirectedEdge
+from ..database import get_session, SMARTS, DirectedEdge
 from .draw import draw_multiple_smarts, draw_multiple_smarts_subset_relations
 from .actions import add_library, calculate_edges
 

@@ -111,7 +111,7 @@ flask db init
 Then, add all SMARTS libraries from the data folder:
 
 ```
-flask smarts add_libraries data/*.smarts
+flask smarts add_libraries data/smarts/*.smarts
 ```
 
 Now, SMARTS-SMARTS subset edges need to be calculated and stored in the database:
@@ -135,7 +135,7 @@ The backend data is now ready.
 After following the steps above, you can start the server via
 
 ```bash
-flask run
+python app.py
 ```
 
 and access the SMARTSexplore application at <http://localhost:5000>.

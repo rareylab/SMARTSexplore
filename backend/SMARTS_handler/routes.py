@@ -8,7 +8,6 @@ from flask import Blueprint, request, jsonify, send_from_directory, current_app
 
 from . import to_json
 
-
 def attach_to_blueprint(blueprint: Blueprint):
     """
     Attaches all available routes to the given :class:`flask.Blueprint` object.

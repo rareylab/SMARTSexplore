@@ -7,10 +7,7 @@ import tempfile
 
 from flask import current_app
 
-import sys
-sys.path.append('backend')
-
-from database import MoleculeSet, get_molecules
+from ..database import MoleculeSet, get_molecules
 
 
 def draw_molecules_from_molset(molset: MoleculeSet) -> None:
@@ -25,8 +22,7 @@ def draw_molecules_from_molset(molset: MoleculeSet) -> None:
     """
     import os
     import shutil
-    sys.path.append('bin/commands')
-    from util import run_process
+    from bin.commands.util import run_process
 
     molfile, line_no_to_molecule_id =\
         get_molecules(molset.molecules)

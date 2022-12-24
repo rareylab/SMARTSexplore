@@ -11,8 +11,8 @@ import werkzeug
 
 from sqlalchemy.sql.expression import func
 
-from smartsexplore.database import MoleculeSet, Molecule, SMARTS, Match
-from smartsexplore.molecules.draw import draw_molecules_from_molset
+from backend.database import MoleculeSet, Molecule, SMARTS, Match
+from backend.SMILES_handler.draw import draw_molecules_from_molset
 
 MOLECULE_UPLOAD_URL = '/molecules/upload'
 GET_MATCHES_URL = '/molecules/matches/'

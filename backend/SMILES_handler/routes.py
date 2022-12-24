@@ -9,10 +9,7 @@ import werkzeug
 from flask import Blueprint, request, current_app, url_for, redirect, send_from_directory
 from werkzeug.utils import secure_filename
 
-import sys
-sys.path.append('backend')
-
-from database import get_session, Molecule, MoleculeSet, Match
+from ..database import get_session, Molecule, MoleculeSet, Match
 from .actions import calculate_molecule_matches
 from .draw import draw_molecules_from_molset
 
@@ -45,7 +42,6 @@ def _check_valid_file(file: werkzeug.datastructures.FileStorage):
 
     try:
         lines = [line.decode('utf-8') for line in file.readlines()]
-        print('\n'.join(lines))
     except UnicodeError:
         raise ValueError(
             'Could not decode file as UTF8 text! Are you sure this is a molecule file?'
@@ -86,11 +82,12 @@ def upload_molecule_set():
     mol_set = None
     try:
         mol_set = calculate_molecule_matches(file)
-        # draw_molecules_from_molset(mol_set)
-        if os.path.exists("D:\BachelorAMD\MYSMARTSexplore\\smilesDB.smiles"):
-            os.remove("D:\BachelorAMD\MYSMARTSexplore\\smilesDB.smiles")
-        if os.path.exists("D:\BachelorAMD\MYSMARTSexplore\\smartsDB.smarts"):
-            os.remove("D:\BachelorAMD\MYSMARTSexplore\\smartsDB.smarts")
+        draw_molecules_from_molset(mol_set)
+        # delete the temporary files
+        if os.path.exists(current_app.config['TMP_SMARTS_PATH']):
+            os.remove(current_app.config['TMP_SMARTS_PATH'])
+        if os.path.exists(current_app.config['TMP_SMILES_PATH']):
+            os.remove(current_app.config['TMP_SMILES_PATH'])
         return matches_for_molecule_set(id=mol_set.id)  # redirect(url_for('molecules.matches_for_molecule_set', id=mol_set.id))
     except Exception as e:
         logging.error(e)

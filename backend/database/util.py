@@ -92,9 +92,6 @@ def get_molecules(molecules):
         os.remove(current_app.config['TMP_SMILES_PATH'])
     f = open(current_app.config['TMP_SMILES_PATH'], "x", encoding="utf-8")
     f.write(text)
-    # for line in smartsfile.readlines():
-    #     print(line)
-    #     f.write(line)
     f.close()
     return moleculefile, line_no_to_molecule_id
 
@@ -112,21 +109,14 @@ def get_smarts() -> tempfile.NamedTemporaryFile:
     if len(smartss) == 0:
         raise NoSMARTSException("No SMARTS in the database to write to a file!")
 
-    print("backend utils")
-
     smartsfile = tempfile.NamedTemporaryFile(mode='r+b', suffix='.smarts', dir="D:")  # ,encoding="utf-8"
     text = '\n'.join(f'{smarts.pattern}\t{smarts.id}' for smarts in smartss)
     smartsfile.write(b'{text}')
-    # for smarts in smartss:
-    #     smartsfile.writelines(f'{smarts.pattern}\t{smarts.id}\n')
     smartsfile.seek(0)
 
     if os.path.exists(current_app.config['TMP_SMARTS_PATH']):
         os.remove(current_app.config['TMP_SMARTS_PATH'])
     f = open(current_app.config['TMP_SMARTS_PATH'], "x", encoding="utf-8")
     f.write(text)
-    # for line in smartsfile.readlines():
-    #     print(line)
-    #     f.write(line)
     f.close()
     return smartsfile

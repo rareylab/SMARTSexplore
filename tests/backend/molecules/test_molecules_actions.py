@@ -1,8 +1,8 @@
 import pytest
 
-from smartsexplore.database import MoleculeSet, Molecule, SMARTS, Match
-from smartsexplore.molecules.actions import calculate_molecule_matches, \
-    create_molecules_from_smiles_file
+from backend.database import MoleculeSet, Molecule, SMARTS, Match
+from backend.SMILES_handler.actions import calculate_molecule_matches, \
+    add_moleculeset_from_file
 
 
 def test_nodematches(session):
@@ -59,8 +59,8 @@ def test_search_in_database(session):
     file_name1 = open("./tests/backend/testdata/test_molecules_split1.smi", "rb+")
     file_name2 = open("./tests/backend/testdata/test_molecules_split2.smi", "rb+")
 
-    mol_id1 = create_molecules_from_smiles_file(file_name1)
-    mol_id2 = create_molecules_from_smiles_file(file_name2)
+    mol_id1 = add_moleculeset_from_file(file_name1)
+    mol_id2 = add_moleculeset_from_file(file_name2)
     # -----------------------------
     assert mol_id1.id != mol_id2.id
     found = False

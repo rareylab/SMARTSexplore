@@ -9,8 +9,8 @@ import tempfile
 from flask import current_app
 from sqlalchemy.orm import subqueryload
 
-from smartsexplore.database import SMARTS, DirectedEdge
-from smartsexplore.smarts.draw import draw_one_smarts, draw_one_smarts_subset_relation, \
+from backend.database import SMARTS, DirectedEdge
+from backend.SMARTS_handler.draw import draw_one_smarts, draw_one_smarts_subset_relation, \
     draw_multiple_smarts, draw_multiple_smarts_subset_relations
 
 

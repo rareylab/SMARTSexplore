@@ -1,7 +1,7 @@
 import pytest
 
-from smartsexplore.database import SMARTS, DirectedEdge, UndirectedEdge
-from smartsexplore.smarts.actions import add_library, calculate_edges
+from backend.database import SMARTS, DirectedEdge, UndirectedEdge
+from backend.SMARTS_handler.actions import add_library, calculate_edges
 
 
 @pytest.fixture

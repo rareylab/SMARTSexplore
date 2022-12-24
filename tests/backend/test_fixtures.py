@@ -1,4 +1,4 @@
-from smartsexplore.database import MoleculeSet
+from backend.database import MoleculeSet
 
 
 def test_session_is_unique_per_test_1(session):

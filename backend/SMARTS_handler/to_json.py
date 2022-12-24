@@ -1,7 +1,7 @@
 """
 Functions to retrieve JSON-renderable representations of graph data stored in the database.
 """
-from backend.database import get_session, SMARTS, DirectedEdge
+from ..database import get_session, SMARTS, DirectedEdge
 
 
 def from_db(min_similarity: float, max_similarity: float) -> dict:

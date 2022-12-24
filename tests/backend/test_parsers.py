@@ -1,3 +1,3 @@
-from smartsexplore.parsers import parse_smartscompare
+from bin.commands.parsers import parse_smartscompare
 
 #def test_parse_smartscompare(session):

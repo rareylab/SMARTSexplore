@@ -7,14 +7,10 @@ import logging
 import click
 from flask import current_app
 
-import sys
-sys.path.append('backend')
-
-from database import SMARTS, get_session, get_smarts, UndirectedEdge, \
+from ..database import SMARTS, get_session, get_smarts, UndirectedEdge, \
     DirectedEdge, NoSMARTSException
 
-sys.path.append('bin/commands')
-from parsers import parse_smartscompare
+from bin.commands.parsers import parse_smartscompare
 
 
 def add_library(name: str, filename: str) -> None:
@@ -70,8 +66,7 @@ def calculate_edges(mode):
     import tempfile
     import os
     import sys
-    sys.path.append('bin/commands')
-    from util import run_process
+    from bin.commands.util import run_process
 
     # Check validity of chosen mode
     implemented_modes = ('Similarity', 'SubsetOfFirst')
@@ -82,7 +77,6 @@ def calculate_edges(mode):
     # Get a DB session, retrieve all SMARTS patterns, and write them into file
     session = get_session()
 
-    print("SMARTS")
     try:
         smartsfile = get_smarts()
     except NoSMARTSException:
@@ -98,7 +92,7 @@ def calculate_edges(mode):
 
     compare_cmd = [
         current_app.config['SMARTSCOMPARE_PATH'],
-        "D:\\BachelorAMD\\MYSMARTSexplore\\test_smarts.smarts",
+        current_app.config['TMP_SMARTS_PATH'],
         # smartsfile.name,
         '-M', '-1',
         # discard edges with <= 0.1 similarity when using (undirected) mode "Similarity"
@@ -108,13 +102,10 @@ def calculate_edges(mode):
         '-D', '`',
         '-m', str(mode_id)
     ]
-    # -d `
-    print("PROCESS")
     run_process(compare_cmd, stdout=smartscomparefile, stderr=sys.stderr)
     smartscomparefile.seek(0)  # must rewind before further usage
 
     # Parse the SMARTScompare output
-    print("ITERATOR")
     parse_iterator = parse_smartscompare(smartscomparefile)
     resultfile_mode = next(parse_iterator)
     assert resultfile_mode == mode,\
@@ -123,11 +114,9 @@ def calculate_edges(mode):
     # --- Code to store results in the database starts here ---
 
     # Get the existing edges in the database and store them in memory, for efficient checks
-    print("EDGES")
     existing_edges = _get_existing_edges(mode, session)
     nof_added_edges = 0
     duplicate_edges = []
-    print("DUPLICATES")
     # Define a function to check for duplicates
 
     def _check_for_duplicates(left, right):
@@ -138,7 +127,6 @@ def calculate_edges(mode):
             return False
 
     # Different loops and logic based on mode
-    print("MODE")
     if mode == 'Similarity':
         for (line_no, lname, rname, mcssim, spsim) in parse_iterator:
             lsmarts = session.query(SMARTS).filter_by(id=int(lname)).first()
@@ -151,7 +139,6 @@ def calculate_edges(mode):
             if not _check_for_duplicates(losmarts.id, hismarts.id):
                 edge = UndirectedEdge(low_smarts=losmarts, high_smarts=hismarts,
                                       mcssim=mcssim, spsim=spsim)
-                print("edge: ", edge)
                 existing_edges.add((losmarts.id, hismarts.id))
                 session.add(edge)
                 nof_added_edges += 1
@@ -170,8 +157,8 @@ def calculate_edges(mode):
 
     # Commit the session and close all temporary files
     session.commit()
-    print("end")
     smartsfile.close()
+    os.remove(current_app.config['TMP_SMARTS_PATH'])
     smartscomparefile.close()
 
 

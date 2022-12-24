@@ -6,7 +6,6 @@ Depends on the :mod:`smartsexplore.database` module.
 """
 
 from flask import Blueprint
-
 from . import routes, commands
 
 bp = Blueprint('molecules', __name__, url_prefix='/molecules')

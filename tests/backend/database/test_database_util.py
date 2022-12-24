@@ -1,5 +1,5 @@
-from smartsexplore.database import Molecule, SMARTS, MoleculeSet, \
-    molecules_to_temporary_smiles_file, write_smarts_to_tempfile
+from backend.database import Molecule, SMARTS, MoleculeSet, \
+    get_smiles, get_smarts
 
 
 def test_smarts_tempfile(session):
@@ -18,7 +18,7 @@ def test_smarts_tempfile(session):
         session.add(smarts)
     session.commit()
 
-    tmp_file = write_smarts_to_tempfile()
+    tmp_file = get_smarts()
     tmp_file.seek(0)
     lines = tmp_file.readlines()
     striplines = [line.strip() for line in lines]  # ignore whitespace, useful for last line tests
@@ -43,7 +43,7 @@ def test_molecule_tempfile(session):
         molecule = Molecule(pattern=pattern, name=f'mol{i}', molset=molset)
         session.add(molecule)
     session.commit()
-    molfile, line_num = molecules_to_temporary_smiles_file(session.query(Molecule).all())
+    molfile, line_num = get_smiles(session.query(Molecule).all())
     molfile.seek(0)
     lines = molfile.readlines()
     striplines = [line.strip() for line in lines]  # ignore whitespace, useful for last line tests

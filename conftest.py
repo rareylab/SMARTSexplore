@@ -7,8 +7,8 @@ from flask import Flask
 from flask.testing import FlaskClient
 from sqlalchemy.orm import Session
 
-from smartsexplore import create_app
-from smartsexplore.database.util import init_db, get_session
+from backend import create_app
+from backend.database.util import init_db, get_session
 
 
 @pytest.fixture

@@ -3,10 +3,7 @@ from flask import current_app, Blueprint
 from flask.cli import with_appcontext
 from sqlalchemy.orm import subqueryload
 
-import sys
-sys.path.append('backend')
-
-from database import get_session, Molecule, MoleculeSet
+from ..database import get_session, Molecule, MoleculeSet
 from .draw import draw_molecules_from_molset
 from .actions import add_moleculeset
 

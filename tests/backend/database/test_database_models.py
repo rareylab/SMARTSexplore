@@ -1,7 +1,7 @@
 import pytest
 from sqlalchemy.exc import IntegrityError
 
-from smartsexplore.database import MoleculeSet, Molecule, SMARTS, Match
+from backend.database import MoleculeSet, Molecule, SMARTS, Match
 
 
 def test_model_creation(session):

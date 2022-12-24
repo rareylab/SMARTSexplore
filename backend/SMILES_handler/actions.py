@@ -5,13 +5,11 @@ molecule-SMARTS match data.
 import logging
 from typing import BinaryIO
 
+import os
 import click
 from flask import current_app
 
-import sys
-sys.path.append('backend')
-
-from database import get_session, MoleculeSet, Molecule, SMARTS, Match, \
+from ..database import get_session, MoleculeSet, Molecule, SMARTS, Match, \
     get_smarts, get_molecules, NoSMARTSException
 
 from bin.commands.parsers import parse_moleculematch
@@ -91,10 +89,8 @@ def calculate_molecule_matches(uploaded_molecules_file: BinaryIO) -> MoleculeSet
     """
     import tempfile
     import sys
-    import os
 
-    sys.path.append('bin/commands')
-    from util import run_process
+    from bin.commands.util import run_process
 
     moleculefile, smartsfile, moleculematchfile = [None] * 3
 
@@ -104,12 +100,10 @@ def calculate_molecule_matches(uploaded_molecules_file: BinaryIO) -> MoleculeSet
         session = get_session()
         mol_set = add_moleculeset_from_file(uploaded_molecules_file)
         moleculefile, _ = get_molecules(mol_set.molecules)
-        print("added molecules")
         try:
             smartsfile = get_smarts()
         except NoSMARTSException:
             session.commit()
-            print("no smarts")
             return mol_set
 
         # Run moleculematch on the temporary SMARTS file, and write the
@@ -124,13 +118,8 @@ def calculate_molecule_matches(uploaded_molecules_file: BinaryIO) -> MoleculeSet
         run_process(match_cmd, stdout=moleculematchfile, stderr=sys.stderr, reraise_exceptions=True)
         moleculematchfile.seek(0)
         # Parse the moleculematch output
-        # print(moleculematchfile.read())
         parse_iterator = parse_moleculematch(moleculematchfile)
-        # print(parse_iterator)
-        # for line in parse_iterator:
-        #     print(line)
         # --- Code to store results in the database starts here ---
-        print("create Matches")
         for (smartsid, moleculeid) in parse_iterator:
             if(not smartsid or not moleculeid):
                 continue
@@ -148,6 +137,10 @@ def calculate_molecule_matches(uploaded_molecules_file: BinaryIO) -> MoleculeSet
             session.commit()
         raise e
     finally:  # close all open file handles
+        if os.path.exists(current_app.config['TMP_SMARTS_PATH']):
+            os.remove(current_app.config['TMP_SMARTS_PATH'])
+        if os.path.exists(current_app.config['TMP_SMILES_PATH']):
+            os.remove(current_app.config['TMP_SMILES_PATH'])
         if uploaded_molecules_file:
             uploaded_molecules_file.close()
         if moleculefile:

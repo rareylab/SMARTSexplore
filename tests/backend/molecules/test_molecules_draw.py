@@ -2,8 +2,8 @@ import math
 import os
 import tempfile
 
-from smartsexplore.database import Molecule, MoleculeSet, current_app
-from smartsexplore.molecules.draw import draw_molecules_from_molset
+from backend.database import Molecule, MoleculeSet, current_app
+from backend.SMILES_handler.draw import draw_molecules_from_molset
 
 
 def test_draw_molset(session):

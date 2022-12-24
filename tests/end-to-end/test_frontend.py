@@ -7,8 +7,8 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 
-from smartsexplore.database import get_session
-from smartsexplore.database.models import SMARTS, DirectedEdge, Molecule, Match
+from backend.database import get_session
+from backend.database.models import SMARTS, DirectedEdge, Molecule, Match
 
 PORT = 7353
 HOST = 'localhost'

@@ -8,13 +8,8 @@ import os
 from typing import Iterable
 from pathlib import Path
 
-import sys
-sys.path.append('backend')
-
-from database import DirectedEdge, SMARTS
-
-sys.path.append('bin/commands')
-from util import run_process
+from ..database import DirectedEdge, SMARTS
+from bin.commands.util import run_process
 
 
 def draw_one_smarts(smarts: SMARTS, viewer_path: str, output_path: str):
