@@ -57,28 +57,6 @@ npm run build
 ```
 
 
-# Building documentation
-
-After following the steps to install the backend and frontend
-dependencies, you can generate browsable HTML documentation by first
-installing the jsdoc package:
-
-```
-npm install -g jsdoc
-```
-
-Then building the documentation:
-
-```
-python setup.py build_sphinx
-```
-
-and opening the file `build/sphinx/html/index.html`. It includes a
-user guide, a developer guide, and documentation for the backend and
-frontend APIs.
-
-
-
 # Running a SMARTSexplore instance
 
 ## Installing required external programs
@@ -86,8 +64,7 @@ frontend APIs.
 Please refer to https://software.zbh.uni-hamburg.de for retrieving the
 required programs listed below.
 
-For making molecule uploads work in the frontend, please place
-licensed versions of the following NAOMI programs into the `bin/`
+For making molecule uploads work in the frontend, please create and place licensed versions of the following NAOMI programs into the `bin/`
 folder:
 
 * `mol2svg`
@@ -99,6 +76,9 @@ the following NAOMI programs there:
 * `SMARTScompare`
 * `SMARTScompareViewer`
 
+# Configuration
+
+When using a Linux system, go to the `__init__.py` in the smartsxeplore folder and remove the `.exe` from the SMARTSCOMPARE_PATH, SMARTSCOMPARE_VIEWER_PATH and MATCHTOOL_PATH.
 
 ## Generating the backend data
 
@@ -132,10 +112,18 @@ The backend data is now ready.
 
 ## Starting the server
 
-After following the steps above, you can start the server via
+After following the steps above, you can start the backend-server via
 
 ```bash
-python app.py
+flask run
 ```
 
-and access the SMARTSexplore application at <http://localhost:5000>.
+and access the backend at <http://localhost:5000>.
+
+To run the frontend-server execute
+
+```bash
+npm run serve
+```
+
+on another terminal. The frontend can be accessed at <http://localhost:8080>

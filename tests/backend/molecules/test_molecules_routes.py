@@ -11,8 +11,8 @@ import werkzeug
 
 from sqlalchemy.sql.expression import func
 
-from backend.database import MoleculeSet, Molecule, SMARTS, Match
-from backend.SMILES_handler.draw import draw_molecules_from_molset
+from smartsexplore.database import MoleculeSet, Molecule, SMARTS, Match, reset_db
+from smartsexplore.smiles.draw import draw_molecules_from_molset
 
 MOLECULE_UPLOAD_URL = '/molecules/upload'
 GET_MATCHES_URL = '/molecules/matches/'
@@ -21,6 +21,7 @@ GET_IMAGES_URL = '/molecules/images/'
 
 @pytest.fixture
 def smarts_molecules_and_matches(session):
+    reset_db()
     smartss = [
         SMARTS(name=f'xyz{i}', pattern='C', library='test')
         for i in range(3)

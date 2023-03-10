@@ -1,4 +1,4 @@
-from backend.database import MoleculeSet
+from smartsexplore.database import MoleculeSet, reset_db
 
 
 def test_session_is_unique_per_test_1(session):
@@ -12,6 +12,7 @@ def test_session_is_unique_per_test_1(session):
     :Authors:
         Simon Welker
     """
+    reset_db()
     assert session.query(MoleculeSet).count() == 0  # uses MoleculeSet only as simple example model
     session.add(MoleculeSet())
     session.commit()

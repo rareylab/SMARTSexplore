@@ -9,12 +9,13 @@ import tempfile
 from flask import current_app
 from sqlalchemy.orm import subqueryload
 
-from backend.database import SMARTS, DirectedEdge
-from backend.SMARTS_handler.draw import draw_one_smarts, draw_one_smarts_subset_relation, \
+from smartsexplore.database import SMARTS, DirectedEdge, reset_db
+from smartsexplore.smarts.draw import draw_one_smarts, draw_one_smarts_subset_relation, \
     draw_multiple_smarts, draw_multiple_smarts_subset_relations
 
 
 def test_draw_one_smarts(session):
+    reset_db()
     smarts = SMARTS(name='2halo_pyrazine_3EWG', pattern='[#7;R1]1[#6]([F,Cl,Br,I])[#6]([$(S(=O)(=O)),$(C(F)(F)(F)),$(C#N),$(N(=O)(=O)),$([N+](=O)[O-]),$(C=O)])[#7][#6][#6]1', library='A')
     session.add(smarts)
     session.commit()
@@ -28,6 +29,7 @@ def test_draw_one_smarts(session):
 
 
 def test_draw_multiple_smarts(session):
+    reset_db()
     smarts = [
         SMARTS(name='2halo_pyrazine_3EWG', pattern='[#7;R1]1[#6]([F,Cl,Br,I])[#6]([$(S(=O)(=O)),$(C(F)(F)(F)),$(C#N),$(N(=O)(=O)),$([N+](=O)[O-]),$(C=O)])[#7][#6][#6]1', library='A'),
         SMARTS(name='monofluoroacetate', pattern='[C;H2](F)C(=O)[O,N,S]', library='A'),
@@ -52,6 +54,7 @@ def test_draw_multiple_smarts(session):
 
 
 def test_draw_one_smarts_subset_relation(session):
+    reset_db()
     smarts1 = SMARTS(name='Chloramidine', pattern='[Cl]C([C&R0])=N', library='SureChEMBL')
     smarts2 = SMARTS(name='halo_imino', pattern='C(=[#7])([Cl,Br,I,$(O(S(=O)(=O)))])', library='BMS')
     session.add(smarts1)
@@ -70,6 +73,7 @@ def test_draw_one_smarts_subset_relation(session):
 
 
 def test_draw_multiple_smarts_subset_relations(session):
+    reset_db()
     smarts = [
         SMARTS(name='2halo_pyrazine_3EWG', pattern='[#7;R1]1[#6]([F,Cl,Br,I])[#6]([$(S(=O)(=O)),$(C(F)(F)(F)),$(C#N),$(N(=O)(=O)),$([N+](=O)[O-]),$(C=O)])[#7][#6][#6]1', library='A'),
         SMARTS(name='monofluoroacetate', pattern='[C;H2](F)C(=O)[O,N,S]', library='A'),
