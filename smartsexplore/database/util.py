@@ -8,15 +8,13 @@ from flask import current_app, g, has_app_context
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 
-from smartsexplore.database import SMARTS
+from .models import SMARTS, DirectedEdge, MoleculeSet, UndirectedEdge, Match, Molecule
 
 
 def get_db(db_url=None):
     """
     Gets an SQLAlchemy session given a valid database URL.
-
     Must be called from within a Flask appcontext.
-
     :returns: A tuple of (engine object, sessionmaker instance).
     """
     if db_url is None:
@@ -71,17 +69,55 @@ def init_db() -> None:
     """
     Initializes the app database appropriately. Currently just means that the ORM model tables are
     created.
-
     Must be used within the Flask appcontext.
     """
-    from smartsexplore.database.models import Base
+    from .models import Base
     engine, sessionmaker = get_db()
     session = sessionmaker()
     Base.metadata.create_all(bind=engine)
     session.commit()
 
 
-def molecules_to_temporary_smiles_file(molecules) -> (tempfile.NamedTemporaryFile, Dict[int, int]):
+def reset_db() -> None:
+    """
+    Resets the app database. Currently just means that the ORM model tables get
+    deleted.
+    Must be used within the Flask appcontext.
+    """
+    session = get_session()
+    session.query(Molecule).delete()
+    session.query(MoleculeSet).delete()
+    session.query(SMARTS).delete()
+    session.query(Match).delete()
+    session.query(UndirectedEdge).delete()
+    session.query(DirectedEdge).delete()
+    session.commit()
+
+
+def reset_molecules() -> None:
+    """
+    Resets the molecules. Currently just means that the ORM model table gets deleted.
+    Must be used within the Flask appcontext.
+    """
+    session = get_session()
+    session.query(Molecule).delete()
+    session.query(MoleculeSet).delete()
+    session.query(Match).delete()
+    session.commit()
+
+
+def reset_edges() -> None:
+    """
+    Resets the edges. Currently just means that the ORM model table gets deleted.
+    Must be used within the Flask appcontext.
+    """
+    session = get_session()
+    session.query(DirectedEdge).delete()
+    session.query(UndirectedEdge).delete()
+    session.commit()
+
+
+def get_molecules(molecules):
     """
     Writes a list of :class:`Molecule` objects to a temporary .smiles file, and returns a handle
     to that file.
@@ -97,17 +133,25 @@ def molecules_to_temporary_smiles_file(molecules) -> (tempfile.NamedTemporaryFil
       * The handle to the written temporary .smiles file
       * A dictionary mapping (line number) to (Molecule id)
     """
+    import tempfile
+    import os
+
     line_no_to_molecule_id = {}
 
-    moleculefile = tempfile.NamedTemporaryFile(mode='w+', suffix='.smiles')
-    moleculefile.write(
-        '\n'.join(f'{mol.pattern}\t{mol.id}' for mol in molecules)
-    )
+    moleculefile = tempfile.NamedTemporaryFile(mode='r+', suffix='.smiles')
+    text = '\n'.join(f'{mol.pattern}\t{mol.id}' for mol in molecules)
+    moleculefile.write(text)
+
     for i, mol in enumerate(molecules):
-        # implicitly will have the correct order since it uses the same iterator as the .write call
         line_no = i+1
         line_no_to_molecule_id[line_no] = mol.id
     moleculefile.seek(0)
+
+    if os.path.exists(current_app.config['TMP_SMILES_PATH']):
+        os.remove(current_app.config['TMP_SMILES_PATH'])
+    f = open(current_app.config['TMP_SMILES_PATH'], "x", encoding="utf-8")
+    f.write(text)
+    f.close()
     return moleculefile, line_no_to_molecule_id
 
 
@@ -118,24 +162,32 @@ class NoSMARTSException(Exception):
     pass
 
 
-def write_smarts_to_tempfile() -> tempfile.NamedTemporaryFile:
+def get_smarts() -> tempfile.NamedTemporaryFile:
     """
     Retrieves all SMARTS patterns currently stored in the database, and writes them out into a
     temporary file, using the IDs from the database as labels for each SMARTS object.
-
+    
     :returns: A file handle to the written temporary .smarts file.
     :raises: :class:`NoSMARTSException`, if there are no SMARTS to be written.
     """
     import tempfile
+    import os
+
     session = get_session()
     smartss = session.query(SMARTS).all()
 
     if len(smartss) == 0:
         raise NoSMARTSException("No SMARTS in the database to write to a file!")
 
-    smartsfile = tempfile.NamedTemporaryFile(mode='r+', suffix='.smarts')
-    smartsfile.write(
-        '\n'.join(f'{smarts.pattern}\t{smarts.id}' for smarts in smartss)
-    )
+    smartsfile = tempfile.NamedTemporaryFile(mode='r+', suffix='.smarts', encoding="utf-8")  # ,encoding="utf-8"
+    text = '\n'.join(f'{smarts.pattern}\t{smarts.id}' for smarts in smartss)
+    # smartsfile.write(b'{text}')
+    smartsfile.write(text)
     smartsfile.seek(0)
+
+    if os.path.exists(current_app.config['TMP_SMARTS_PATH']):
+        os.remove(current_app.config['TMP_SMARTS_PATH'])
+    f = open(current_app.config['TMP_SMARTS_PATH'], "x", encoding="utf-8")
+    f.write(text)
+    f.close()
     return smartsfile

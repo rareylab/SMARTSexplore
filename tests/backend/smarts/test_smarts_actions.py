@@ -1,6 +1,6 @@
 import pytest
 
-from smartsexplore.database import SMARTS, DirectedEdge, UndirectedEdge
+from smartsexplore.database import SMARTS, DirectedEdge, UndirectedEdge, reset_db
 from smartsexplore.smarts.actions import add_library, calculate_edges
 
 
@@ -18,6 +18,7 @@ def test_calculate_edges_subset(session, example_smarts):
     :Authors:
         Pia Plümer, Simon Welker
     """
+    reset_db()
     session.add_all(example_smarts)
     session.commit()
 
@@ -39,6 +40,7 @@ def test_calculate_edges_similarity(session, example_smarts):
     :Authors:
         Pia Plümer, Simon Welker
     """
+    reset_db()
     session.add_all(example_smarts)
     session.commit()
 
@@ -56,6 +58,7 @@ def test_calculate_edges_raises_when_mode_is_invalid(session, example_smarts):
     :Authors:
         Simon Welker
     """
+    reset_db()
     session.add_all(example_smarts)
     session.commit()
 
@@ -66,7 +69,8 @@ def test_calculate_edges_raises_when_mode_is_invalid(session, example_smarts):
 
 
 def test_data_from_file_smarts(session):
-    filename = "./tests/backend/testdata/test_smarts.smarts"
+    reset_db()
+    filename = "tests/backend/testdata/test_smarts.smarts"
     name = "bms"
     add_library(name, filename)
     # -----------------------------

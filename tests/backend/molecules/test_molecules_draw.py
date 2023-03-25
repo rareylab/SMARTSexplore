@@ -2,8 +2,8 @@ import math
 import os
 import tempfile
 
-from smartsexplore.database import Molecule, MoleculeSet, current_app
-from smartsexplore.molecules.draw import draw_molecules_from_molset
+from smartsexplore.database import Molecule, MoleculeSet, current_app, reset_db
+from smartsexplore.smiles.draw import draw_molecules_from_molset
 
 
 def test_draw_molset(session):
@@ -11,6 +11,7 @@ def test_draw_molset(session):
     :Authors:
         Simon Welker
     """
+    reset_db()
     molset = MoleculeSet()
     session.add(molset)
 

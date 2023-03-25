@@ -6,8 +6,7 @@ image representations of these objects using the SMARTSViewer visual language [S
 from werkzeug.utils import secure_filename
 from flask import Blueprint, request, jsonify, send_from_directory, current_app
 
-from smartsexplore.smarts import to_json
-
+from . import to_json
 
 def attach_to_blueprint(blueprint: Blueprint):
     """

@@ -10,7 +10,7 @@ import pytest
 from sqlalchemy import func
 from sqlalchemy.orm import subqueryload
 
-from smartsexplore.database import SMARTS, DirectedEdge
+from smartsexplore.database import SMARTS, DirectedEdge, reset_db
 from smartsexplore.smarts.draw import draw_multiple_smarts, draw_multiple_smarts_subset_relations
 
 DATA_URL = '/smarts/data'
@@ -23,6 +23,7 @@ NEDGES = 21
 
 @pytest.fixture
 def smarts_with_edges(session):
+    reset_db()
     smartss = []
     edges = []
 

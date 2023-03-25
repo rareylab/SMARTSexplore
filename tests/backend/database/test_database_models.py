@@ -1,10 +1,11 @@
 import pytest
 from sqlalchemy.exc import IntegrityError
 
-from smartsexplore.database import MoleculeSet, Molecule, SMARTS, Match
+from smartsexplore.database import MoleculeSet, Molecule, SMARTS, Match, reset_db
 
 
 def test_model_creation(session):
+    reset_db()
     molset = MoleculeSet()
     molecule = Molecule(pattern='CCCC1CC1', name='', molset=molset)
     smarts = SMARTS(name='NO_phosphonate', pattern='P(=O)ON', library='BMS')
@@ -20,6 +21,7 @@ def test_model_creation(session):
 
 
 def test_validates_match_uniqueness(session):
+    reset_db()
     molset = MoleculeSet()
     molecule = Molecule(pattern='c1cccccc1', name='bonk', molset=molset)
     smarts = SMARTS(name='NO_phosphonate', pattern='P(=O)ON', library='bms')

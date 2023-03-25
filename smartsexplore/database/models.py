@@ -93,7 +93,6 @@ class UndirectedEdge(Base):
     """
     An undirected edge between two :class:`SMARTS`, describing a **similarity** relationship as
     determined by SMARTScompare, along with an MCS similarity value and an SP similarity value.
-
     .. note::
       This class is currently unused within the larger context of the SMARTSexplore app, because
       only directed edges are delivered to the frontend and rendered.
@@ -218,5 +217,3 @@ class Match(Base):
         """
         self.molecule = molecule
         self.smarts = smarts
-
-

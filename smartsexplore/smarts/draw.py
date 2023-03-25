@@ -9,7 +9,7 @@ from typing import Iterable
 from pathlib import Path
 
 from smartsexplore.database import DirectedEdge, SMARTS
-from smartsexplore.util import run_process
+from bin.commands.util import run_process
 
 
 def draw_one_smarts(smarts: SMARTS, viewer_path: str, output_path: str):

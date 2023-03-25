@@ -17,8 +17,8 @@ from flask.cli import with_appcontext
 from sqlalchemy.orm import subqueryload
 
 from smartsexplore.database import get_session, SMARTS, DirectedEdge
-from smartsexplore.smarts.draw import draw_multiple_smarts, draw_multiple_smarts_subset_relations
-from smartsexplore.smarts.actions import add_library, calculate_edges
+from .draw import draw_multiple_smarts, draw_multiple_smarts_subset_relations
+from .actions import add_library, calculate_edges
 
 
 def attach_to_blueprint(blueprint: Blueprint):

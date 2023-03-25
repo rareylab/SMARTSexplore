@@ -1,7 +1,7 @@
 """
 Functions to retrieve JSON-renderable representations of graph data stored in the database.
 """
-from smartsexplore.database import get_session, SMARTS, DirectedEdge
+from ..database import get_session, SMARTS, DirectedEdge
 
 
 def from_db(min_similarity: float, max_similarity: float) -> dict:
@@ -19,7 +19,6 @@ def from_db(min_similarity: float, max_similarity: float) -> dict:
         DirectedEdge.spsim >= min_similarity,
         DirectedEdge.spsim <= max_similarity
     ).all()
-
     graph_dict = {
         'nodes': [
             {
@@ -29,7 +28,8 @@ def from_db(min_similarity: float, max_similarity: float) -> dict:
                 'pattern': smart.pattern
             }
             for smart in smarts
-        ],
+        ]
+        ,
         'edges': [
             {
                 'id': edge.id,

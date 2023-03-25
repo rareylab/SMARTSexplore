@@ -7,9 +7,10 @@ import logging
 import click
 from flask import current_app
 
-from smartsexplore.database import SMARTS, get_session, write_smarts_to_tempfile, UndirectedEdge, \
+from smartsexplore.database import SMARTS, get_session, get_smarts, UndirectedEdge, \
     DirectedEdge, NoSMARTSException
-from smartsexplore.parsers import parse_smartscompare
+
+from bin.commands.parsers import parse_smartscompare
 
 
 def add_library(name: str, filename: str) -> None:
@@ -27,7 +28,7 @@ def add_library(name: str, filename: str) -> None:
     import re
     session = get_session()
 
-    with open(filename, 'r') as stream:  # TODO maybe some line documentation
+    with open(filename, 'r', encoding="utf-8") as stream:  # TODO maybe some line documentation
         ignored_lines = []
         nof_added_smarts = 0
         for i, line in enumerate(stream):
@@ -62,8 +63,10 @@ def calculate_edges(mode):
     similarity value lower bound; otherwise a too large number of
     edges for our purposes would (generally) be generated.
     """
-    import tempfile, os, sys
-    from smartsexplore.util import run_process
+    import tempfile
+    import os
+    import sys
+    from bin.commands.util import run_process
 
     # Check validity of chosen mode
     implemented_modes = ('Similarity', 'SubsetOfFirst')
@@ -73,8 +76,9 @@ def calculate_edges(mode):
 
     # Get a DB session, retrieve all SMARTS patterns, and write them into file
     session = get_session()
+
     try:
-        smartsfile = write_smarts_to_tempfile()
+        smartsfile = get_smarts()
     except NoSMARTSException:
         logging.warning("No SMARTS in the database! Exiting the edge calculation process...")
 
@@ -85,9 +89,11 @@ def calculate_edges(mode):
     # Run SMARTScompare on the temporary SMARTS file, and write the
     # stdout to a new temporary result output file.
     smartscomparefile = tempfile.NamedTemporaryFile(mode='w+')
+
     compare_cmd = [
         current_app.config['SMARTSCOMPARE_PATH'],
-        smartsfile.name,
+        current_app.config['TMP_SMARTS_PATH'],
+        # smartsfile.name,
         '-M', '-1',
         # discard edges with <= 0.1 similarity when using (undirected) mode "Similarity"
         *(['-t', '0.1'] if mode == 'Similarity' else []),
@@ -111,11 +117,11 @@ def calculate_edges(mode):
     existing_edges = _get_existing_edges(mode, session)
     nof_added_edges = 0
     duplicate_edges = []
-
     # Define a function to check for duplicates
-    def _check_for_duplicates(l, r):
-        if (l, r) in existing_edges:
-            duplicate_edges.append((l, r))
+
+    def _check_for_duplicates(left, right):
+        if (left, right) in existing_edges:
+            duplicate_edges.append((left, right))
             return True
         else:
             return False
@@ -152,6 +158,7 @@ def calculate_edges(mode):
     # Commit the session and close all temporary files
     session.commit()
     smartsfile.close()
+    os.remove(current_app.config['TMP_SMARTS_PATH'])
     smartscomparefile.close()
 
 

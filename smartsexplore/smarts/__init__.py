@@ -5,7 +5,8 @@ Depends on the :mod:`smartsexplore.database` module.
 
 from flask import Blueprint
 
-from smartsexplore.smarts import commands, routes
+from . import commands
+from . import routes
 
 bp = Blueprint('smarts', __name__, url_prefix='/smarts')
 bp.cli.short_help = 'Manage SMARTS data.'

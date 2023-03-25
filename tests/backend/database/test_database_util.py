@@ -1,8 +1,10 @@
 from smartsexplore.database import Molecule, SMARTS, MoleculeSet, \
-    molecules_to_temporary_smiles_file, write_smarts_to_tempfile
+    get_molecules, get_smarts, reset_db
 
+from flask import current_app
 
 def test_smarts_tempfile(session):
+    reset_db()
     smarts_patterns = [
         '[$(S(=O)(=O)),$(C(F)(F)(F)),$(C#N),$(N(=O)(=O)),$([N+](=O)[O-]),$(C(=O))]C#[C;!$(C-N);!$(C-n)]',
         '[N;!R]([$(S(=O)(=O)),$(C(F)(F)(F)),$(C#N),$(N(=O)(=O)),$([N+](=O)[O-]),$(C(=O))])=[N;!R]([$(S(=O)(=O)),$(C(F)(F)(F)),$(C#N),$(N(=O)(=O)),$([N+](=O)[O-]),$(C(=O))])',
@@ -18,9 +20,10 @@ def test_smarts_tempfile(session):
         session.add(smarts)
     session.commit()
 
-    tmp_file = write_smarts_to_tempfile()
-    tmp_file.seek(0)
-    lines = tmp_file.readlines()
+    tmp_file = get_smarts()
+    f = open(current_app.config['TMP_SMARTS_PATH'])
+    f.seek(0)
+    lines = f.readlines()
     striplines = [line.strip() for line in lines]  # ignore whitespace, useful for last line tests
 
     assert len(lines) == len(smarts_patterns)
@@ -32,6 +35,7 @@ def test_smarts_tempfile(session):
 
 
 def test_molecule_tempfile(session):
+    reset_db()
     molset = MoleculeSet()
     session.add(molset)
     smiles_patterns = [
@@ -43,9 +47,10 @@ def test_molecule_tempfile(session):
         molecule = Molecule(pattern=pattern, name=f'mol{i}', molset=molset)
         session.add(molecule)
     session.commit()
-    molfile, line_num = molecules_to_temporary_smiles_file(session.query(Molecule).all())
-    molfile.seek(0)
-    lines = molfile.readlines()
+    molfile, line_num = get_molecules(session.query(Molecule).all())
+    f = open(current_app.config['TMP_SMILES_PATH'])
+    f.seek(0)
+    lines = f.readlines()
     striplines = [line.strip() for line in lines]  # ignore whitespace, useful for last line tests
 
     assert session.query(Molecule).count() == len(smiles_patterns)

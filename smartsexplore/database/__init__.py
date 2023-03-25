@@ -1,6 +1,5 @@
 """
 Database definitions and management
-
 Defines and interacts with an SQL database holding all relevant data for the SMARTSexplore
 application. Uses SQLAlchemy for all of this definition and interaction.
 Furthermore, uses SQLAlchemy's ORM feature to define all models in
@@ -9,9 +8,9 @@ Furthermore, uses SQLAlchemy's ORM feature to define all models in
 
 from flask import Blueprint
 
-from smartsexplore.database.commands import attach_to_blueprint
-from smartsexplore.database.models import *
-from smartsexplore.database.util import *
+from .commands import attach_to_blueprint
+from .models import *
+from .util import *
 
 
 bp = Blueprint('db', __name__)
